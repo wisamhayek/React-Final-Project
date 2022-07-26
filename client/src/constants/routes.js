@@ -1,0 +1,9 @@
+export const HOME ='/';
+export const BROWSE ='/browse';
+export const CART ='/cart';
+export const PROFILE ='/profile';
+export const PRODUCT ='/product';
+export const ADMIN = '/admin';
+export const LOGIN = '/login';
+export const SIGNUP = '/signup';
+export const NOT_FOUND ='/*';
