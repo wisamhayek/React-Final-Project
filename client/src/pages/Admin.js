@@ -1,7 +1,13 @@
-import React from 'react'
+import React, { Fragment } from 'react'
+import NavBar from '../components/navBar/navBar'
+import AdminMenu from '../components/admin/adminMenu'
+
 
 export default function Admin() {
   return (
-    <div>Admin</div>
+    <Fragment>
+      <NavBar />
+      <AdminMenu />
+    </Fragment>
   )
 }
