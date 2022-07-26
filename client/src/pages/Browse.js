@@ -1,7 +1,11 @@
-import React from 'react'
+import React, { Fragment } from 'react'
+import NavBar from '../components/navBar/navBar'
 
 export default function Browse() {
   return (
-    <div>Browse</div>
+    <Fragment>
+      <NavBar />
+      <div>Browse</div>
+    </Fragment>
   )
 }

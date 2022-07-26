@@ -227,7 +227,7 @@ const ResponsiveAppBar = () => {
                 aria-label="go to cart page"
                 aria-controls="go-to-cart"
                 aria-haspopup="true"
-                onClick={()=>{navigate("cart")}}
+                onClick={()=>{navigate(ROUTES.CART)}}
                 color="inherit"
                 >
                 <ShoppingCartIcon />

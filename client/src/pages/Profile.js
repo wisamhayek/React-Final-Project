@@ -1,7 +1,11 @@
-import React from 'react'
+import React, { Fragment } from 'react'
+import NavBar from '../components/navBar/navBar'
 
 export default function Profile() {
   return (
-    <div>Profile</div>
+    <Fragment>
+      <NavBar />
+      <div>Profile</div>
+    </Fragment>
   )
 }
