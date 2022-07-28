@@ -19,6 +19,7 @@ function TabPanel(props) {
 
   return (
     <div
+    style={{width:"100%"}}
       role="tabpanel"
       hidden={value !== index}
       id={`vertical-tabpanel-${index}`}
@@ -26,7 +27,7 @@ function TabPanel(props) {
       {...other}
     >
       {value === index && (
-        <Box sx={{ p: 3 }}>
+        <Box sx={{ p: 2 }}>
           <div>{children}</div>
         </Box>
       )}
@@ -57,7 +58,7 @@ export default function AdminMenu() {
   return (
     <Fragment>
     <Box
-      sx={{ flexGrow: 1, bgcolor: 'background.paper', display: {xs: "none", md: "flex"}, height: "fit-content" }}
+      sx={{ flexGrow: 1, bgcolor: 'background.paper', display: {xs: "none", md: "flex"}, height: "fit-content",width: "100%" }}
     >
       <Tabs
         orientation="vertical"
