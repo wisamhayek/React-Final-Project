@@ -34,14 +34,26 @@ export default function ImgSlider() {
 
 
   return (
-    <div className='imageSliderGrid' style={{display: "grid",gridTemplateColumns: "10% 80% 10%",height: "70vh",marginTop:"2rem",marginBottom:"2rem"}}>
+    <div className='imageSliderGrid' style={{display: "grid",gridTemplateColumns: "10% 80% 10%",height: "70vh",maxHeight:"70hv",marginTop:"2rem",marginBottom:"2rem"}}>
     <div className='leftButton' style={{margin:"auto"}}>
-    <Button onClick={()=>{prevSlide()}}>
+    <Button sx={{minWidth:"30px",p:"0"}} onClick={()=>{prevSlide()}}>
         <ChevronLeftIcon fontSize='large'></ChevronLeftIcon>
     </Button>
     </div>
-    <Box sx={{width:"100%",height:"100%"}}>
-      <img src={images[active]} alt="sliderimage" className='ImageSlider' style={{
+    <Box sx={{display:{xs:"none",md:"block"},width:"100%",height:"100%"}}>
+      <img src={images[active]} alt="sliderimage" style={{
+        margin:"auto",
+        textAlign:"center",
+        backgroundColor:"#0a7cd4",
+        width: "100%",
+        // aspectRatio:"16/9",
+        // height:"100%",
+        maxHeight:"70vh"
+      }}/>
+    </Box>
+
+    <Box sx={{display:{xs:"block",md:"none"},width:"100%",height:"100%"}}>
+      <img src={images[active]} alt="sliderimage" style={{
         margin:"auto",
         textAlign:"center",
         backgroundColor:"#0a7cd4",
@@ -51,7 +63,7 @@ export default function ImgSlider() {
     </Box>
     
     <div className='rightButton' style={{margin:"auto"}}>
-    <Button onClick={()=>{nextSlide()}}>
+    <Button sx={{minWidth:"30px",p:"0"}} onClick={()=>{nextSlide()}}>
         <ChevronRightIcon fontSize='large'></ChevronRightIcon>
     </Button>
     </div>
@@ -60,5 +72,5 @@ export default function ImgSlider() {
 }
 
 
-// Fix Image Slider Position (Width/Height)
+// Fix Image Slider Position (Width/Height) - icons move up and down
 // Add under slider Dots to show how many available

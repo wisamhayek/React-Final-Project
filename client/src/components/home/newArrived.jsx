@@ -7,7 +7,7 @@ import ProductImage4 from '../../assets/Nikon D60.jpeg'
 
 export default function NewArrived() {
   return (
-    <Fragment>
+    <Box sx={{padding:"8px"}}>
         <Typography textAlign={"center"} sx={{
             margin:"auto",
             backgroundColor:"#1976d2",
@@ -17,33 +17,33 @@ export default function NewArrived() {
             padding:"4px",
             marginBottom:"1rem"
             }}>Newly Arrived</Typography>
-        <Box className='categories' sx={{display:"grid",gridTemplateColumns:{xs: "1fr 1fr", md:"1fr 1fr 1fr 1fr"},width:{xs:"100%",md:"80%"},margin:"auto",rowGap:"1rem",columnGap:{xs:"0px",md:"1%"}}}>
-            <Box sx={{width:"200px",height:"300px",borderRadius:"20px"}}>
-                <img src={ProductImage1} alt="product" style={{height:"200px",width:"200px"}}/>
+        <Box sx={{display:"grid",gridTemplateColumns:{xs: "1fr 1fr", md:"1fr 1fr 1fr 1fr"},width:{xs:"100%",md:"80%"},margin:"auto",rowGap:"1rem",columnGap:{xs:"0px",md:"1%"}}}>
+            <Box sx={{width:"100%",height:"300px",borderRadius:"20px"}}>
+                <img src={ProductImage1} alt="product" style={{width:"100%",aspectRatio:"1/1"}}/>
                 <Typography padding={"4px"} variant='h6'>Product Name</Typography>
                 <div style={{display:"flex",flexDirection:"row",gap:"1rem"}}>
                     <Typography padding={"4px"} variant="body1">$$$$</Typography>
                     <Button size="small" variant="contained">Add to Cart</Button>
                 </div>
             </Box>
-            <Box sx={{width:"200px",height:"300px",borderRadius:"20px"}}>
-                <img src={ProductImage2} alt="product" style={{height:"200px",width:"200px"}}/>
+            <Box sx={{width:"100%",height:"300px",borderRadius:"20px"}}>
+                <img src={ProductImage2} alt="product" style={{width:"100%",aspectRatio:"1/1"}}/>
                 <Typography padding={"4px"} variant='h6'>Product Name</Typography>
                 <div style={{display:"flex",flexDirection:"row",gap:"1rem"}}>
                     <Typography padding={"4px"} variant="body1">$$$$</Typography>
                     <Button size="small" variant="contained">Add to Cart</Button>
                 </div>
             </Box>
-            <Box sx={{width:"200px",height:"300px",borderRadius:"20px",display:{xs:"none",md:"block"}}}>
-                <img src={ProductImage3} alt="product" style={{height:"200px",width:"200px"}}/>
+            <Box sx={{width:"100%",height:"300px",borderRadius:"20px",display:{xs:"none",md:"block"}}}>
+                <img src={ProductImage3} alt="product" style={{width:"100%",aspectRatio:"1/1"}}/>
                 <Typography padding={"4px"} variant='h6'>Product Name</Typography>
                 <div style={{display:"flex",flexDirection:"row",gap:"1rem"}}>
                     <Typography padding={"4px"} variant="body1">$$$$</Typography>
                     <Button size="small" variant="contained">Add to Cart</Button>
                 </div>
             </Box>
-            <Box sx={{width:"200px",height:"300px",borderRadius:"20px",display:{xs:"none",md:"block"}}}>
-                <img src={ProductImage4} alt="product" style={{height:"200px",width:"200px"}}/>
+            <Box sx={{width:"100%",height:"300px",borderRadius:"20px",display:{xs:"none",md:"block"}}}>
+                <img src={ProductImage4} alt="product" style={{width:"100%",aspectRatio:"1/1"}}/>
                 <Typography padding={"4px"} variant='h6'>Product Name</Typography>
                 <div style={{display:"flex",flexDirection:"row",gap:"1rem"}}>
                     <Typography padding={"4px"} variant="body1">$$$$</Typography>
@@ -51,6 +51,6 @@ export default function NewArrived() {
                 </div>
             </Box>
         </Box>
-    </Fragment>
+    </Box>
   )
 }
