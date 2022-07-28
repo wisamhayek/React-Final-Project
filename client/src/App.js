@@ -7,8 +7,6 @@ import * as ROUTES from './constants/routes';
 
 
 const NotFound =lazy(()=> import ('./pages/not-found.js'));
-// const Book =lazy(()=> import ('./pages/book'));
-// const Discover =lazy(()=> import ('./pages/discover'));
 
 const Home =lazy(()=> import ('./pages/Home'));
 const Admin =lazy(()=> import ('./pages/Admin'));
@@ -22,12 +20,12 @@ export const UserContext = React.createContext();
 
 function App() {
 
-  const [hotelContext, setHotelContext] = useState([]);
+  // const [hotelContext, setHotelContext] = useState([]);
   const [userContext, setUserContext] = useState([]);
 
   return (
     <UserContext.Provider value={{userContext, setUserContext}}>
-    <HotelContext.Provider value={{hotelContext, setHotelContext}}>
+    {/* <HotelContext.Provider value={{hotelContext, setHotelContext}}> */}
     <BrowserRouter>
     <Suspense fallback={<p>Loading...</p>}>
       <Routes>
@@ -35,12 +33,13 @@ function App() {
         <Route exact path={ROUTES.BROWSE} element={<Browse/>}/>
         <Route exact path={ROUTES.CART} element={<Cart/>}/>
         <Route exact path={ROUTES.PROFILE} element={<Profile/>}/>
-        <Route exact path={ROUTES.ADMIN} element={<Admin/>}/>  
+        <Route exact path={ROUTES.ADMIN} element={<Admin/>}/>
+        <Route exact path='product' element={<Product/>}/>  
         <Route path={ROUTES.NOT_FOUND} element={<NotFound/>}/>
       </Routes>
     </Suspense>
   </BrowserRouter>
-  </HotelContext.Provider>
+  {/* </HotelContext.Provider> */}
   </UserContext.Provider>
   );
 }

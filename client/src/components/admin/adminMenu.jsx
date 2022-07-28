@@ -8,7 +8,7 @@ import Box from '@mui/material/Box';
 
 import Orders from './orders.jsx';
 import Sales from './sales.jsx';
-import Products from './products.jsx';
+import Products from './products';
 import Coupons from './coupons.jsx';
 import Users from './users.jsx';
 import MobileMenu from './mobileMenu.jsx';
