@@ -5,7 +5,7 @@ export default function AccountDetails() {
   return (
     <Fragment>
     <Typography variant='h5' sx={{margin:"auto",textAlign:"center", marginBottom:"2rem"}}>Account Details</Typography>
-    <Box sx={{margin:"auto",textAlign:"center", width:"fit-content"}}>
+    <Box sx={{marginLeft:"2rem",textAlign:"start", width:"fit-content"}}>
       <div style={{display:"grid",gridTemplateColumns: "1fr 1fr"}}>
         <div className='textFields'>
           <Typography variant='h6'>Name : </Typography>
