@@ -49,7 +49,7 @@ const list = (anchor) => (
   return (
     <Fragment>
       <NavBar />
-      <Box sx={{display:"grid",gridTemplateColumns:{xs:"100%" ,md:"20% 80%"}, margin:"auto",marginTop:"2%"}}>
+      <Box sx={{display:"grid",gridTemplateColumns:{xs:"100%" ,md:"20% 80%"}, margin:"auto",marginTop:"2%",maxWidth:{xs:"100%",md:"100%",lg:"fit-content"}}}>
         <Box className='sideMenu' sx={{display:{xs:"none" ,md:"block"}, margin:"auto",bgcolor:"#1976d2",width:"-webkit-fill-available",height:"-webkit-fill-available",padding:"1rem"}}>
           <Typography variant='h6' color={"white"}>Filter By</Typography>
           <Divider/>
@@ -61,7 +61,7 @@ const list = (anchor) => (
           <Box className='searchFilter' sx={{display:"grid",gridTemplateColumns:"1fr 1fr",padding:"1rem"}}>
             <SearchAppBar />
             <Box sx={{display:"flex", flexDirection: "row", justifyContent: "flex-end"}}>
-            <Button  onClick={toggleDrawer('left', true)}>Filter</Button>
+            <Button  sx={{display: {xs:"block", md:"none"}}} onClick={toggleDrawer('left', true)}>Filter</Button>
             <SortBy />
             {/* <Button >Sort By</Button> */}
             </Box>

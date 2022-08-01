@@ -13,11 +13,9 @@ import TableSortLabel from '@mui/material/TableSortLabel';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import Paper from '@mui/material/Paper';
-import IconButton from '@mui/material/IconButton';
-import Tooltip from '@mui/material/Tooltip';
-import FilterListIcon from '@mui/icons-material/FilterList';
 import { visuallyHidden } from '@mui/utils';
 import { Button } from '@mui/material';
+import { AddProduct } from './buttons.jsx';
 
 
 // add Product ID -> Post updates to server
@@ -165,11 +163,7 @@ const EnhancedTableToolbar =()=>{
 
         {/* Add Search Input Here -> the search will filter the inital Data (rows now)*/}
         {/* Add Button to add Products -> open a modal // Button should be in seprate .JSX File */}
-        <Tooltip title="Filter list">
-          <IconButton>
-            <FilterListIcon />
-          </IconButton>
-        </Tooltip>
+       <AddProduct />
     </Toolbar>
   );
 };
