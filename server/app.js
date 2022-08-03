@@ -13,6 +13,7 @@ const UserRoutes = require('./routes/user');
 const OrdersRoutes = require('./routes/order.js');
 const ProductsRoutes = require('./routes/product.js');
 const CouponsRoutes = require('./routes/coupon.js');
+const GoogleRoutes = require('./routes/google.js');
 
 app.use(express.json({ limit: "50mb"}));
 app.options('*', cors())
@@ -33,6 +34,7 @@ app.use('/api/v1/users', UserRoutes);
 app.use('/api/v1/orders', OrdersRoutes);
 app.use('/api/v1/products', ProductsRoutes);
 app.use('/api/v1/coupons', CouponsRoutes);
+app.use('/api/google', GoogleRoutes);
 
 app.listen(PORT, (req, res) => {
     console.log(`Server running at port ${PORT}`);

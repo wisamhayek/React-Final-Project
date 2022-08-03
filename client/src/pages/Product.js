@@ -8,9 +8,9 @@ import RealtedProducts from '../components/product/realtedProducts.jsx'
 
 export default function Product() {
   return (
-    <Fragment>
+    <Fragment >
       <NavBar />
-      <Box sx={{display:"grid",gridTemplateColumns: {xs: "1fr", md:"1fr 1fr"},marginTop:"2rem"}}>
+      <Box sx={{display:"grid",gridTemplateColumns: {xs: "1fr", md:"1fr 1fr"},margin:"auto",marginTop:"2rem",maxWidth:{xs:"100%",md:"100%",lg:"fit-content"}}}>
         <ImageSlider />
         <Variants />
       </Box>

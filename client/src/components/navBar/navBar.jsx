@@ -25,6 +25,7 @@ import * as ROUTES from '../../constants/routes';
 import SearchAppBar from './search';
 import { UserContext } from '../../App';
 import LoginModal from './loginModal';
+import { googleLogout } from '@react-oauth/google';
 
 const pages = ['Home', 'Browse', 'Contact'];
 const settings = ['Profile', 'Logout'];
@@ -46,6 +47,7 @@ const ResponsiveAppBar = () => {
     function logout(){
         setUserContext(null)
         localStorage.clear()
+        googleLogout();
     }
 
     // Profile Icon Menu list

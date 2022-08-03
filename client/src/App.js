@@ -4,6 +4,7 @@ import React, { useState } from "react";
 import {Suspense, lazy} from "react"
 import {BrowserRouter ,Route, Routes} from 'react-router-dom';
 import * as ROUTES from './constants/routes';
+import { GoogleOAuthProvider } from '@react-oauth/google';
 
 
 const NotFound =lazy(()=> import ('./pages/not-found.js'));
@@ -23,7 +24,10 @@ function App() {
   // const [hotelContext, setHotelContext] = useState([]);
   const [userContext, setUserContext] = useState([]);
 
+  const CLIENTID="839890200657-ab7pl0ud5o5a1bpvi69vjjiud8jrrlqt.apps.googleusercontent.com";
+
   return (
+    <GoogleOAuthProvider clientId={CLIENTID}>
     <UserContext.Provider value={{userContext, setUserContext}}>
     {/* <HotelContext.Provider value={{hotelContext, setHotelContext}}> */}
     <BrowserRouter>
@@ -41,6 +45,7 @@ function App() {
   </BrowserRouter>
   {/* </HotelContext.Provider> */}
   </UserContext.Provider>
+  </GoogleOAuthProvider>
   );
 }
 

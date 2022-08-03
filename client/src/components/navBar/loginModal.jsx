@@ -13,7 +13,7 @@ import { FormControl, IconButton, InputAdornment, InputLabel, OutlinedInput, Tex
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 import "../../pages/login-signup.css";
-
+import { GoogleLogin } from '@react-oauth/google';
 
 
 const style = {
@@ -31,7 +31,8 @@ const style = {
 
 export default function LoginModal() {
 
-  const {userContext, setUserContext} = useContext(UserContext)
+
+    const {userContext, setUserContext} = useContext(UserContext)
 
     const [open, setOpen] = useState(false);
     const handleOpen = () => {
@@ -52,12 +53,48 @@ export default function LoginModal() {
     const [password, setPassword] = useState("");
     const [name,setName]=useState("");
     const [errorHandle,setError] = useState(null)
+
+
+    const handleLogin =(e)=>{
+      console.log(e);
+      let userToken = e.credential;
+      console.log(userToken);
+      axios.post("http://localhost:2000/api/google/login",{
+        userToken
+        }).then((response)=>{
+        console.log(response.data.message);
+        setUserContext(response.data.user)
+        localStorage.setItem('activeUser', JSON.stringify(response.data.user))
+        localStorage.setItem('userToken', JSON.stringify(response.data.token))
+        handleClose();
+        }).catch((error)=>{
+            setError(error.response.data.message)
+            console.log(error);
+        })
+    }
+
+    const handleSignup =(e)=>{
+      console.log(e);
+      let userToken = e.credential;
+      console.log(userToken);
+      axios.post("http://localhost:2000/api/google/signup",{
+        userToken
+        }).then((response)=>{
+        console.log(response.data.message);
+        setUserContext(response.data.user)
+        localStorage.setItem('activeUser', JSON.stringify(response.data.user))
+        localStorage.setItem('userToken', JSON.stringify(response.data.token))
+        handleClose();
+        }).catch((error)=>{
+            setError(error.response.data.message)
+            console.log(error);
+        })
+    }
     
 
     //Login
     const submitForm = (e) => {
         e.preventDefault();
-        // axios.post("https://midtermtodo.herokuapp.com/api/v1/users/login",{
         axios.post("http://localhost:2000/api/v1/users/login",{
         email,
         password
@@ -170,6 +207,15 @@ export default function LoginModal() {
       </FormControl>
       <Button color="primary" disabled={isInvalid} className="loginButton" variant="contained" onClick={submitForm}
       >Log in</Button>
+      <GoogleLogin
+        onSuccess={credentialResponse => {
+          // console.log(credentialResponse);
+          handleLogin(credentialResponse)
+        }}
+        onError={() => {
+          console.log('Login Failed');
+        }}
+      />
         <p>Already have an account? 
             <Button onClick={()=>{setLogin(false)}}>Signup</Button>
         </p>
@@ -219,6 +265,16 @@ export default function LoginModal() {
         </FormControl>
         <Button disabled={isInvalid1} className="loginButton" variant="contained" onClick={submitForm1}
         >Sign Up</Button>
+        <GoogleLogin
+          onSuccess={credentialResponse => {
+            handleSignup(credentialResponse)
+          }}
+          onError={() => {
+            console.log('Login Failed');
+          }}
+          text='signup_with'
+          context='signup'
+        />
          <Typography>Already have an account? 
             <Button onClick={()=>{setLogin(true)}}> Sign In</Button>
         </Typography>

@@ -7,7 +7,7 @@ import ProductImage4 from '../../assets/Nikon D60.jpeg'
 
 export default function RelatedProduct() {
   return (
-    <Box sx={{padding:"8px"}}>
+    <Box sx={{padding:"8px",maxWidth:{xs:"100%",md:"100%",lg:"fit-content"}}}>
         <Typography textAlign={"center"} sx={{
             margin:"auto",
             backgroundColor:"#1976d2",
@@ -17,7 +17,7 @@ export default function RelatedProduct() {
             padding:"4px",
             marginBottom:"1rem"
             }}>Related Products</Typography>
-        <Box sx={{display:"grid",gridTemplateColumns:{xs: "1fr 1fr", md:"1fr 1fr 1fr 1fr"},width:{xs:"100%",md:"80%"},margin:"auto",rowGap:"1rem",columnGap:{xs:"0px",md:"1%"}}}>
+        <Box sx={{display:"grid",gridTemplateColumns:{xs: "1fr 1fr", md:"1fr 1fr 1fr 1fr"},width:{xs:"100%",md:"80%"},margin:"auto",marginTop:"2rem",rowGap:"1rem",columnGap:{xs:"0px",md:"1%"},maxWidth:{xs:"100%",md:"100%",lg:"60%"}}}>
             <Box sx={{width:"100%",height:"300px",borderRadius:"20px"}}>
                 <img src={ProductImage1} alt="product" style={{width:"100%",aspectRatio:"1/1"}}/>
                 <Typography padding={"4px"} variant='h6'>Product Name</Typography>
