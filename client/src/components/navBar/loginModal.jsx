@@ -54,30 +54,12 @@ export default function LoginModal() {
     const [name,setName]=useState("");
     const [errorHandle,setError] = useState(null)
 
-
-    const handleLogin =(e)=>{
+    // Login / Signup with Google
+    const handleGoogle =(e)=>{
       console.log(e);
       let userToken = e.credential;
       console.log(userToken);
       axios.post("http://localhost:2000/api/google/login",{
-        userToken
-        }).then((response)=>{
-        console.log(response.data.message);
-        setUserContext(response.data.user)
-        localStorage.setItem('activeUser', JSON.stringify(response.data.user))
-        localStorage.setItem('userToken', JSON.stringify(response.data.token))
-        handleClose();
-        }).catch((error)=>{
-            setError(error.response.data.message)
-            console.log(error);
-        })
-    }
-
-    const handleSignup =(e)=>{
-      console.log(e);
-      let userToken = e.credential;
-      console.log(userToken);
-      axios.post("http://localhost:2000/api/google/signup",{
         userToken
         }).then((response)=>{
         console.log(response.data.message);
@@ -210,7 +192,7 @@ export default function LoginModal() {
       <GoogleLogin
         onSuccess={credentialResponse => {
           // console.log(credentialResponse);
-          handleLogin(credentialResponse)
+          handleGoogle(credentialResponse)
         }}
         onError={() => {
           console.log('Login Failed');
@@ -267,7 +249,7 @@ export default function LoginModal() {
         >Sign Up</Button>
         <GoogleLogin
           onSuccess={credentialResponse => {
-            handleSignup(credentialResponse)
+            handleGoogle(credentialResponse)
           }}
           onError={() => {
             console.log('Login Failed');
