@@ -1,7 +1,11 @@
 import { Box, Button, Typography } from '@mui/material'
-import React, { Fragment } from 'react'
+import React, { Fragment,useContext, useState } from 'react'
+import { UserContext } from '../../App'
 
 export default function AccountDetails() {
+
+  const {userContext, setUserContext} = useContext(UserContext)
+
   return (
     <Fragment>
     <Typography variant='h5' sx={{margin:"auto",textAlign:"center", marginBottom:"2rem"}}>Account Details</Typography>
@@ -13,9 +17,9 @@ export default function AccountDetails() {
           <Typography variant='h6'>Password :</Typography>
         </div>
         <div className='rightFields'>
-          <Typography variant='h6'>Take from Global Context</Typography>
-          <Typography variant='h6'>Context :</Typography>
-          <Typography variant='h6'>Context :</Typography>
+          <Typography variant='h6'>{userContext.name}</Typography>
+          <Typography variant='h6'>{userContext.email}</Typography>
+          <Typography variant='h6'>********</Typography>
         </div>
       </div>
     </Box>

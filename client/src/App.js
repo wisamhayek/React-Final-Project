@@ -18,18 +18,19 @@ const Profile =lazy(()=> import ('./pages/Profile'));
 
 export const HotelContext = React.createContext();
 export const UserContext = React.createContext();
+export const ProfileContext = React.createContext();
 
 function App() {
 
-  // const [hotelContext, setHotelContext] = useState([]);
   const [userContext, setUserContext] = useState([]);
+  const [profileContext, setProfileContext] = useState([]);
 
   const CLIENTID="839890200657-ab7pl0ud5o5a1bpvi69vjjiud8jrrlqt.apps.googleusercontent.com";
 
   return (
     <GoogleOAuthProvider clientId={CLIENTID}>
     <UserContext.Provider value={{userContext, setUserContext}}>
-    {/* <HotelContext.Provider value={{hotelContext, setHotelContext}}> */}
+    <ProfileContext.Provider value={{profileContext, setProfileContext}}>
     <BrowserRouter>
     <Suspense fallback={<p>Loading...</p>}>
       <Routes>
@@ -43,7 +44,7 @@ function App() {
       </Routes>
     </Suspense>
   </BrowserRouter>
-  {/* </HotelContext.Provider> */}
+  </ProfileContext.Provider>
   </UserContext.Provider>
   </GoogleOAuthProvider>
   );

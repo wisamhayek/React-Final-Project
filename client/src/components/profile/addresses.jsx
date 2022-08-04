@@ -1,9 +1,12 @@
-import { Box, Button, Divider, TextField, Typography } from '@mui/material'
-import React, { Fragment } from 'react'
+import { Box, Button, Divider, Typography } from '@mui/material'
+import React, { Fragment,useContext } from 'react'
+import { ProfileContext } from '../../App.js';
 import {AddShippingButton, AddBillingButton} from './addButtons.jsx';
 
 
 export default function Addresses() {
+
+  const {profileContext, setProfileContext} = useContext(ProfileContext)
 
   return (
     <Fragment>
@@ -12,11 +15,11 @@ export default function Addresses() {
       <Typography variant='h6' sx={{margin:"auto",textAlign:"start", marginBottom:"1rem"}}>Shipping Address :</Typography>
       <Box sx={{display: "flex",flexDirection:'row', width: "max-content", textAlign: "start"}}>
         <Box sx={{backgroundColor:"#dedede",width:"fit-content",padding:"2rem",borderRadius:"1rem"}}>
-          <Typography>Wisam Hayek</Typography>
-          <Typography >Address 1</Typography>
-          <Typography >Address 2</Typography>
-          <Typography >City, Zipcode</Typography>
-          <Typography >Province</Typography>
+          <Typography>{profileContext.profile.shippingAddress.name}</Typography>
+          <Typography>{profileContext.profile.shippingAddress.address1}</Typography>
+          <Typography>{profileContext.profile.shippingAddress.address2}</Typography>
+          <Typography>{profileContext.profile.shippingAddress.city}, {profileContext.profile.shippingAddress.zipcode}</Typography>
+          <Typography>{profileContext.profile.shippingAddress.province}</Typography>
         </Box>
         <Box sx={{display:"flex",flexDirection:"column",margin:"auto"}}>
           <Button size='small' sx={{height:"fit-content",width:"fit-content"}}>Edit</Button>
@@ -33,11 +36,11 @@ export default function Addresses() {
       <Typography variant='h6' sx={{margin:"auto",textAlign:"start", marginBottom:"1rem"}}>Billing Address :</Typography>
       <Box sx={{display: "flex",flexDirection:'row', width: "max-content", textAlign: "start"}}>
         <Box sx={{backgroundColor:"#dedede",width:"fit-content",padding:"2rem",borderRadius:"1rem"}}>
-          <Typography>Wisam Hayek</Typography>
-          <Typography >Address 1</Typography>
-          <Typography >Address 2</Typography>
-          <Typography >City, Zipcode</Typography>
-          <Typography >Province</Typography>
+        <Typography>{profileContext.profile.shippingAddress.name}</Typography>
+          <Typography>{profileContext.profile.shippingAddress.address1}</Typography>
+          <Typography>{profileContext.profile.shippingAddress.address2}</Typography>
+          <Typography>{profileContext.profile.shippingAddress.city}, {profileContext.profile.shippingAddress.zipcode}</Typography>
+          <Typography>{profileContext.profile.shippingAddress.province}</Typography>
         </Box>
         <Box sx={{display:"flex",flexDirection:"column",margin:"auto"}}>
           <Button size='small' sx={{height:"fit-content",width:"fit-content"}}>Edit</Button>

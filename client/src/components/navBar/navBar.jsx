@@ -23,7 +23,7 @@ import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 
 import * as ROUTES from '../../constants/routes';
 import SearchAppBar from './search';
-import { UserContext } from '../../App';
+import { ProfileContext, UserContext } from '../../App';
 import LoginModal from './loginModal';
 import { googleLogout } from '@react-oauth/google';
 
@@ -34,6 +34,7 @@ const ResponsiveAppBar = () => {
 
     const navigate = useNavigate();
     const {userContext, setUserContext} = useContext(UserContext)
+    const {profileContext, setProfileContext} = useContext(ProfileContext)
 
     useEffect(()=>{
         var userActive = JSON.parse(localStorage.getItem('activeUser'));
@@ -46,6 +47,7 @@ const ResponsiveAppBar = () => {
 
     function logout(){
         setUserContext(null)
+        setProfileContext(null)
         localStorage.clear()
         googleLogout();
     }

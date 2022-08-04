@@ -26,7 +26,10 @@ const createUser = async (req, res) => {
             user: {
                 name: data.name,
                 email: data.email,
-                id: data._id
+                id: data._id,
+                isAdmin: data.isAdmin,
+                orders: data.orders,
+                profile: data.profile
             },
             token
         })
@@ -59,7 +62,10 @@ const loginUser = async (req, res) => {
                     user: {
                         name: findUser.name,
                         email: findUser.email,
-                        id: findUser._id
+                        id: findUser._id,
+                        isAdmin: findUser.isAdmin,
+                        orders: findUser.orders,
+                        profile: findUser.profile
                     },
                     token
                 })
@@ -97,7 +103,14 @@ const getUserById = async (req, res) => {
 
         return res.status(200).json({
             message: "Succesfully fetched user based on ID",
-            data
+            data:{
+                id: data._id,
+                name:data.name,
+                email: data.email,
+                isAdmin: data.isAdmin,
+                orders: data.orders,
+                profile: data.profile
+            }
         })
     } catch(error) {
         return res.status(500).json({
@@ -107,6 +120,8 @@ const getUserById = async (req, res) => {
     }
 }
 
+
+// Not working, fix it
 const getUsers = async (req, res) => {
     try {
         const token = req.headers?.authorization?.split(" ")[1];
@@ -123,7 +138,14 @@ const getUsers = async (req, res) => {
 
                 return res.status(200).json({
                     message: "Succesfully fetched list of User",
-                    data
+                    data:{
+                        id: data._id,
+                        name:data.name,
+                        email: data.email,
+                        isAdmin: data.isAdmin,
+                        orders: data.orders,
+                        profile: data.profile
+                    }
             })
             }else {
                 return res.status(404).json({
