@@ -37,17 +37,17 @@ const updatePayment = async (req, res) => {
     }
 }
 
-const updateShipping = async (req, res) => {
 
+const updateShipping = async (req, res) => {
+    
     const ownerid = req.body.ownerid
     const name = req.body.name
-    // Encrypt the card details before saving
     const address1 = req.body.address1;
     const address2 = req.body.address2;
     const city = req.body.city;
     const zipcode = req.body.zipcode;
     const province = req.body.province;
-    const sameBilling = req.body.sameBilling;
+    const sameBilling = req.body.checked;
 
     let newAddress ={
         name,
@@ -61,7 +61,8 @@ const updateShipping = async (req, res) => {
     try {
         const Shipping = await User.updateOne({ _id: ownerid},{ $set: { "profile.shippingAddress" : newAddress } });
 
-        if(sameBilling === "yes"){
+        if(sameBilling === true){
+            console.log(sameBilling);
             const Billing = await User.updateOne({ _id: ownerid},{ $set: { "profile.billingAddress" : newAddress } });
             console.log(Billing);
         }
@@ -78,11 +79,32 @@ const updateShipping = async (req, res) => {
     }
 }
 
+
+const deleteShipping = async (req, res) => {
+    
+    const ownerid = req.body.ownerid
+
+    try {
+        const Shipping = await User.updateOne({ _id: ownerid},{ $set: { "profile.shippingAddress" : "" } });
+        // const Shipping = await User.updateOne({ _id: ownerid},{ $unset: { "profile.shippingAddress" : "" } });
+        console.log(Shipping);
+
+        return res.status(200).json({
+            message: "Succesfully deleted the shipping address",
+        })
+    } catch(error) {
+        return res.status(500).json({
+            message: "There was an error deleting the shipping address",
+            error
+        })
+    }
+}
+
+
 const updateBilling = async (req, res) => {
 
     const ownerid = req.body.ownerid
     const name = req.body.name
-    // Encrypt the card details before saving
     const address1 = req.body.address1;
     const address2 = req.body.address2;
     const city = req.body.city;
@@ -107,6 +129,26 @@ const updateBilling = async (req, res) => {
     } catch(error) {
         return res.status(500).json({
             message: "There was an error updating the billing address",
+            error
+        })
+    }
+}
+
+
+const deleteBilling = async (req, res) => {
+    
+    const ownerid = req.body.ownerid
+
+    try {
+        const Billing = await User.updateOne({ _id: ownerid},{ $set: { "profile.billingAddress" : "" } });
+        console.log(Billing);
+
+        return res.status(200).json({
+            message: "Succesfully deleted the billing address",
+        })
+    } catch(error) {
+        return res.status(500).json({
+            message: "There was an error deleting the billing address",
             error
         })
     }
@@ -139,6 +181,8 @@ const getProfileById = async (req, res) => {
 module.exports = {
     updatePayment,
     updateShipping,
+    deleteShipping,
+    deleteBilling,
     updateBilling,
     getProfileById
 }
