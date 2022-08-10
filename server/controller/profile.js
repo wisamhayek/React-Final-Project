@@ -7,18 +7,18 @@ require('dotenv').config();
 const updatePayment = async (req, res) => {
 
     const ownerid = req.body.ownerid
-    const last4 = req.body.last4
-    // Encrypt the card details before saving
+    const last4 = String(req.body.cardNumber).slice(-4);
     const nameOnCard = req.body.name;
-    const cardNumber = req.body.cardNumber;
-    const expiry = req.body.exp;
-    const cvv = req.body.cvv;
-
+    // Encrypt the card details before saving
+    const encryptedCardNumber = await bcrypt.hash(req.body.cardNumber, 10);
+    const encryptedExpiry = await bcrypt.hash(req.body.expiry, 10);
+    const encryptedCvc = await bcrypt.hash(req.body.cvc, 10);
+    
     let newPayment ={
         nameOnCard,
-        cardNumber,
-        expiry,
-        cvv,
+        encryptedCardNumber,
+        encryptedExpiry,
+        encryptedCvc,
         last4
     }
 
@@ -32,6 +32,25 @@ const updatePayment = async (req, res) => {
     } catch(error) {
         return res.status(500).json({
             message: "There was an error updating the payment method!",
+            error
+        })
+    }
+}
+
+const deletePayment = async (req, res) => {
+    
+    const ownerid = req.body.ownerid
+
+    try {
+        const Payment = await User.updateOne({ _id: ownerid},{ $set: { "profile.paymentMethod" : "" } });
+        console.log(Payment);
+
+        return res.status(200).json({
+            message: "Succesfully deleted the payment method",
+        })
+    } catch(error) {
+        return res.status(500).json({
+            message: "There was an error deleting the payment method",
             error
         })
     }
@@ -180,6 +199,7 @@ const getProfileById = async (req, res) => {
 
 module.exports = {
     updatePayment,
+    deletePayment,
     updateShipping,
     deleteShipping,
     deleteBilling,

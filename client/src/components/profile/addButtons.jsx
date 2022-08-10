@@ -487,3 +487,59 @@ return (
   </>
 )
 }
+
+
+
+export function DeletePaymnetButton() {
+
+  const {userContext, setUserContext} = useContext(UserContext)
+  const {profileContext, setProfileContext} = useContext(ProfileContext)
+  const [ownerid, setID] = useState(userContext.id);
+
+  const [open, setOpen] = useState(false);
+
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => setOpen(false);
+
+  // Refresh the Profile Context after updating
+  function refreshProfile(){
+    axios.get(`http://localhost:2000/api/v1/profile/${ownerid}`)
+    .then((response)=>{
+      setProfileContext(response.data.data)
+    }).catch((error)=>{
+        console.log(error);
+    })
+  }
+
+  function deletePaymnet(){
+    axios.delete("http://localhost:2000/api/v1/profile/payment",{data: {ownerid:ownerid}})
+    .then((resp)=>{
+      console.log(resp);
+      refreshProfile();
+    }).catch((error)=>{
+      console.log(error);
+    })
+  }
+
+return (
+  <>
+  <Button size='small' onClick={handleClickOpen}>Delete</Button>
+  <Dialog open={open} onClose={handleClose}> 
+      <DialogTitle>Confirm Delete</DialogTitle>
+      <DialogContent sx={{display:"flex",flexDirection:"column",rowGap:"8px",padding:"16px"}}>
+        <Typography>Are you sure you want to delete the saved card? this action can't be reverted</Typography>
+      </DialogContent>
+      <DialogActions>
+        <Button onClick={handleClose}>Cancel</Button>
+        <Button onClick={()=>{
+          handleClose();
+          deletePaymnet();
+          }} variant="contained">Delete</Button>
+      </DialogActions>
+    </Dialog>
+  </>
+)
+}

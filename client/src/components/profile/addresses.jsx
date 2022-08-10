@@ -8,11 +8,6 @@ export default function Addresses() {
 
   const {profileContext, setProfileContext} = useContext(ProfileContext)
 
-  function test(){
-    console.log(profileContext.profile.shippingAddress);  
-  }
-  
-
   return (
     <Fragment>
     <Typography variant='h5' sx={{margin:"auto",textAlign:"center", marginBottom:"2rem"}}>Addresses</Typography>
@@ -28,10 +23,8 @@ export default function Addresses() {
           <Typography>{profileContext.profile.shippingAddress.province}</Typography>
         </Box>
         <Box sx={{display:"flex",flexDirection:"column",margin:"auto"}}>
-          {/* <Button size='small' sx={{height:"fit-content",width:"fit-content"}}>Edit</Button> */}
           <EditShippingButton />
           <DeleteShippingButton />
-          {/* <Button size='small' sx={{height:"fit-content",width:"fit-content"}}>Delete</Button> */}
         </Box>
       </Box>
       }
