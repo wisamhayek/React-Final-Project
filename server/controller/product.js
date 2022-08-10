@@ -6,12 +6,37 @@ require('dotenv').config();
 
 const addProduct = async (req, res) => {
 
-    console.log(req.headers);
+    // console.log(req.headers);
     console.log(req.body);
+
+    const name = req.body.product.name;
+    const description = req.body.product.description;
+    const price = req.body.product.price;
+    const quantity = req.body.product.quantity;
+    const category = req.body.product.category;
+    const imageurl = req.body.imageLinks;
+    const itemid = req.body.product.itemid;
+
+    const isVariant = req.body.product.isVariant;
+    const variantName = req.body.variantName;
+    const variants = req.body.variants;
+    
+    let newProduct = {
+        name: name,
+        description: description,
+        price: price,
+        quantity: quantity,
+        category: category,
+        isVariant: isVariant,
+        variantName: variantName,
+        variants: variants,
+        imageurl: imageurl,
+        itemid: itemid,
+    }
+
     try {
 
-        const body = req.body;
-        const product = new Product(body);
+        const product = new Product(newProduct);
        
         const data = await product.save();
 
@@ -30,12 +55,6 @@ const addProduct = async (req, res) => {
 
 const getProducts = async (req, res) => {
     try {
-
-        // const data = await Product.find().populate({
-        //     path: "hotel"
-        // }).populate({
-        //     path: "ownerid"
-        // })
 
         const data = await Product.find()
 
