@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import Product from '../../components/home/Product'
 import axios from 'axios'
-import { useParams } from 'react-router-dom'
+// import { useParams } from 'react-router-dom'
 
 export default function GridProducts({category, sortby}) {
 

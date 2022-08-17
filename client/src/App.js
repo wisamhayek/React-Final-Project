@@ -15,7 +15,6 @@ const Cart =lazy(()=> import ('./pages/Cart'));
 const Browse =lazy(()=> import ('./pages/Browse'));
 const Product =lazy(()=> import ('./pages/Product'));
 const Profile =lazy(()=> import ('./pages/Profile'));
-const Wishlist =lazy(()=> import ('./pages/Wishlist.js'));
 const Checkout =lazy(()=> import ('./pages/Checkout.js'));
 
 export const UserContext = React.createContext();
@@ -43,7 +42,6 @@ function App() {
         <Route exact path={ROUTES.BROWSECAT} element={<Browse/>}/>
         <Route exact path={ROUTES.CART} element={<Cart/>}/>
         <Route exact path={ROUTES.PROFILE} element={<Profile/>}/>
-        <Route exact path={ROUTES.WISHLIST} element={<Wishlist/>}/>
         <Route exact path={ROUTES.ADMIN} element={<Admin/>}/>
         <Route exact path={ROUTES.PRODUCT} element={<Product/>}/>
         <Route path={ROUTES.NOT_FOUND} element={<NotFound/>}/>

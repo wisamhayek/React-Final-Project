@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { Button} from '@mui/material'
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
-import SliderImage from '../../assets/home1.jpeg'
+// import SliderImage from '../../assets/home1.jpeg'
 import Image1 from '../../assets/home1.jpeg'
 import Image2 from '../../assets/Nikon D60.jpeg'
 import Image3 from '../../assets/Samsung S22.jpeg'

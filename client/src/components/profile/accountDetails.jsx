@@ -1,5 +1,5 @@
-import { Box, Button, Typography } from '@mui/material'
-import React, { Fragment,useContext, useState } from 'react'
+import { Box, Typography } from '@mui/material'
+import React, { Fragment,useContext } from 'react'
 import { UserContext } from '../../App'
 
 export default function AccountDetails() {

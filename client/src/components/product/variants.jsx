@@ -2,21 +2,21 @@ import { Button, Typography } from '@mui/material'
 import { Box } from '@mui/system'
 import axios from 'axios';
 import React, { Fragment, useContext, useEffect, useState } from 'react'
-import styled from 'styled-components';
+// import styled from 'styled-components';
 import { CartContext, UserContext } from '../../App';
-import ColorButton from './buttons'
+// import ColorButton from './buttons'
 
-const StyledButton = styled(Button)`
-  background-color: grey;
-  color: #fff;
-  padding: 6px 12px;
-  &:hover {
-    background-color: #blue;
-  }
-  &:focus {
-    background-color: red;
-  }
-`;
+// const StyledButton = styled(Button)`
+//   background-color: grey;
+//   color: #fff;
+//   padding: 6px 12px;
+//   &:hover {
+//     background-color: #blue;
+//   }
+//   &:focus {
+//     background-color: red;
+//   }
+// `;
 
 
 export default function Variants({item}) {

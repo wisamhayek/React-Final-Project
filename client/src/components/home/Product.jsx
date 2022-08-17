@@ -1,5 +1,5 @@
-import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
-import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
+// import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
+// import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import SearchIcon from '@mui/icons-material/Search';
 import styled from "styled-components";
 import { Typography } from '@mui/material';
@@ -39,13 +39,6 @@ const Container = styled.div`
   }
 `;
 
-const Circle = styled.div`
-  width: 200px;
-  height: 200px;
-  border-radius: 50%;
-  background-color: white;
-  position: absolute;
-`;
 
 const Image = styled.img`
   height: 75%;
@@ -73,7 +66,6 @@ const Icon = styled.div`
 export default function Product({item}) {
   return (
     <Container>
-      {/* <Circle /> */}
       <Image src={item.imageurl?.imageurl1} />
       <Box sx={{display:"flex",flexDirection:"column",rowGap:"4px"}}>
       <Typography width={{xs:"250px", md: "250px"}} noWrap={true} variant='h6' sx={{fontFamily:"-apple-system, BlinkMacSystemFont, sans-serif"}}>{item?.name}</Typography>

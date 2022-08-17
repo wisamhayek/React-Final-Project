@@ -1,25 +1,19 @@
-import { Box, Button, Divider, FormControl, FormControlLabel, FormLabel, InputLabel, MenuItem, Radio, RadioGroup, Select, Typography } from '@mui/material'
+import { Box, Button, Divider, FormControl, FormControlLabel,  InputLabel, MenuItem, Radio, RadioGroup, Select, Typography } from '@mui/material'
 import React, { Fragment, useEffect, useState } from 'react'
 import NavBar from '../components/navBar/navBar'
-import SearchAppBar from '../components/navBar/search'
+// import SearchAppBar from '../components/navBar/search'
 import Drawer from '@mui/material/Drawer';
 
-// import SortBy from '../components/browse/buttons'
-// import { newProducts } from '../constants/metaData';
-// import Product from '../components/home/Product'
-// import axios from 'axios'
 import { useParams } from 'react-router-dom'
 import GridProducts from '../components/browse/gridProducts'
 import axios from 'axios';
-
-import { useNavigate } from "react-router-dom";
-
+// import { useNavigate } from "react-router-dom";
 
 
 
 export default function Browse() {
 
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
 
   const {cat} = useParams()
 

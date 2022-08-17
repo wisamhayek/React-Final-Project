@@ -1,9 +1,9 @@
 import { Box } from '@mui/system'
 import React, { Fragment, useEffect, useState } from 'react'
-import Image1 from '../../assets/home1.jpeg'
-import Image2 from '../../assets/Nikon D60.jpeg'
-import Image3 from '../../assets/Samsung S22.jpeg'
-import Image4 from '../../assets/iphone 13.jpeg'
+// import Image1 from '../../assets/home1.jpeg'
+// import Image2 from '../../assets/Nikon D60.jpeg'
+// import Image3 from '../../assets/Samsung S22.jpeg'
+// import Image4 from '../../assets/iphone 13.jpeg'
 
 export default function ImageSlider({item}) {
 
