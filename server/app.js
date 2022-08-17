@@ -22,12 +22,9 @@ app.options('*', cors())
 app.use(cors())
 app.use(morgan('dev'));
 
-app.use(express.static(path.join(__dirname + '/public')))
-// app.use(express.static('client/build'));
+// app.use(express.static(path.join(__dirname + '/public')))
+app.use(express.static('client/build'));
 
-// app.get('*', (req, res) => {
-    // res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'));
-// });
 
 mongoose.connect(mongoURl, (error)=>{
     if(error){
@@ -45,6 +42,10 @@ app.use('/api/v1/coupons', CouponsRoutes);
 app.use('/api/google', GoogleRoutes);
 app.use('/api/v1/profile', ProfileRoutes);
 app.use('/create-checkout-session', checkoutRoutes);
+
+app.get('*', (req, res) => {
+    res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'));
+});
 
 app.listen(PORT, (req, res) => {
     console.log(`Server running at port ${PORT}`);
