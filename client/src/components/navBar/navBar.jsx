@@ -17,13 +17,13 @@ import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import AdbIcon from '@mui/icons-material/Adb';
 import Drawer from '@mui/material/Drawer';
-import { Divider } from '@mui/material';
+import { Badge, Divider } from '@mui/material';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 
 
 import * as ROUTES from '../../constants/routes';
 import SearchAppBar from './search';
-import { ProfileContext, UserContext } from '../../App';
+import { CartContext, ProfileContext, UserContext } from '../../App';
 import LoginModal from './loginModal';
 import { googleLogout } from '@react-oauth/google';
 
@@ -35,6 +35,9 @@ const ResponsiveAppBar = () => {
     const navigate = useNavigate();
     const {userContext, setUserContext} = useContext(UserContext)
     const {profileContext, setProfileContext} = useContext(ProfileContext)
+    const {cartContext, setCartContext} = useContext(CartContext)
+
+    const [cartCount,setCartCount] = useState("")
 
     useEffect(()=>{
         var userActive = JSON.parse(localStorage.getItem('activeUser'));
@@ -45,10 +48,16 @@ const ResponsiveAppBar = () => {
         }
     },[])
 
+    useEffect(()=>{
+        // console.log("Length is: "+cartContext.length);
+        setCartCount(cartContext?.length)
+    },[cartContext])
+
     function logout(){
-        setUserContext(null)
-        setProfileContext(null)
-        localStorage.clear()
+        setUserContext(null);
+        setProfileContext(null);
+        setCartContext(null);
+        localStorage.clear();
         googleLogout();
     }
 
@@ -102,7 +111,8 @@ const ResponsiveAppBar = () => {
             sx={{ width: anchor === 'top' || anchor === 'bottom' ? 'auto' : 250,
                 overflow: "scroll",
                 padding:"1rem",
-                backgroundColor: '#1976d2',
+                // backgroundColor: '#1976d2',
+                backgroundColor: '#ff6600',
                 height: "100vh",
                 textAlign:"center"
             }}
@@ -140,10 +150,10 @@ const ResponsiveAppBar = () => {
     );
 
 
-
     return (
         <>
-        <AppBar position="static">
+        {/* Navbar Background Color */}
+        <AppBar position="static" sx={{bgcolor:"black"}}>
         <Container maxWidth="xl">
             <Toolbar disableGutters>
             <AdbIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} />
@@ -234,7 +244,10 @@ const ResponsiveAppBar = () => {
                 onClick={()=>{navigate(ROUTES.CART)}}
                 color="inherit"
                 >
-                <ShoppingCartIcon />
+                <Badge badgeContent={cartCount} color='primary'>
+                {/* <Badge badgeContent={cartContext?.length} color='primary'> */}
+                    <ShoppingCartIcon />
+                </Badge>
                 </IconButton>
             </Box>
 

@@ -177,20 +177,117 @@ const deleteBilling = async (req, res) => {
 const getProfileById = async (req, res) => {
 
     const id = req.params.id;
+    console.log(id);
 
     try {
-        const data = await User.findOne({ _id: id});
+        const data = await User.findOne({ _id: id}).populate({
+            path: 'profile',
+            populate: {path: 'cart.itemid'}});
 
         return res.status(200).json({
             message: "Succesfully fetched user based on ID",
             data:{
                 profile: data.profile,
-                orders:data.orders
+                orders:data.orders,
+                cart:data.cart
             }
         })
     } catch(error) {
         return res.status(500).json({
             message: "There was an error!",
+            error
+        })
+    }
+}
+
+
+// add item to cart
+const addToCart = async (req, res) => {
+
+    const ownerid = req.body.ownerid
+    const itemid = req.body.itemid
+    const quantity = req.body.quantity;
+    const variant = req.body.variant;
+    
+    let cartItems ={
+        itemid,
+        quantity,
+        variant
+    }
+
+    try {
+        const Cart = await User.updateOne(
+            { _id: ownerid },
+            { $push: { "profile.cart": cartItems } }
+         )
+        console.log(Cart);
+
+        return res.status(200).json({
+            message: "Succesfully added the item to cart",
+        })
+    } catch(error) {
+        return res.status(500).json({
+            message: "There was an error adding to cart",
+            error
+        })
+    }
+}
+
+
+// Update item quanity in cart
+const updateCart = async (req, res) => {
+
+    const ownerid = req.body.ownerid
+    const itemid = req.body.itemid
+    const quantity = req.body.quantity;
+    
+    console.log(ownerid);
+    console.log(itemid);
+    console.log(quantity);
+    try {
+        const Cart = await User.updateOne({
+            $and: [
+                {_id : ownerid},
+                {'profile.cart.itemid': itemid }
+                // {'profile.cart.itemid': ObjectId(itemid) }
+            ]},
+            { "$set": { "profile.cart.$.quantity": quantity } },
+            {strict:false}
+         )
+        console.log(Cart);
+
+        return res.status(200).json({
+            message: "Succesfully updated cart",
+            Cart
+        })
+    } catch(error) {
+        return res.status(500).json({
+            message: "There was an error updating the cart",
+            error
+        })
+    }
+
+}
+
+// Delete item from cart
+const deleteCart = async (req, res) => {
+
+    const ownerid = req.headers.ownerid
+    const itemid = req.headers.itemid
+
+    try {
+        const Cart = await User.updateOne(
+            { _id : ownerid },
+            {$pull : {"profile.cart" : {"itemid": itemid}}}
+          )
+        console.log(Cart);
+
+        return res.status(200).json({
+            message: "Succesfully deleted the item from cart",
+        })
+    } catch(error) {
+        return res.status(500).json({
+            message: "There was an error deleting item from cart",
             error
         })
     }
@@ -204,5 +301,8 @@ module.exports = {
     deleteShipping,
     deleteBilling,
     updateBilling,
-    getProfileById
+    getProfileById,
+    addToCart,
+    deleteCart,
+    updateCart
 }

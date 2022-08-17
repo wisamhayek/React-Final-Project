@@ -27,6 +27,19 @@ const UserSchema = mongoose.Schema({
         },
         paymentMethod:{
             type: Object
+        },
+        cart:{
+            // type: Array,
+            itemid: {
+                type:  mongoose.Schema.Types.ObjectId,
+                ref: 'Products'
+            },
+            quantity: {
+                type: Number
+            },
+            variant: {
+                type: String
+            }
         }
     },
     orders: [{

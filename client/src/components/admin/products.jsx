@@ -15,34 +15,35 @@ import Typography from '@mui/material/Typography';
 import Paper from '@mui/material/Paper';
 import { visuallyHidden } from '@mui/utils';
 import { Button } from '@mui/material';
-import { AddProduct } from './buttons.jsx';
+import { AddProduct, DeleteProduct, EditProduct } from './buttons.jsx';
+import axios from 'axios';
 
 
 // add Product ID -> Post updates to server
-function createData(name, price, quantity) {
-  return {
-    name,
-    price,
-    quantity
-  };
-}
+// function createData(name, price, quantity) {
+//   return {
+//     name,
+//     price,
+//     quantity
+//   };
+// }
 
 // Data will fetch from server -> loop through it and create rows
-const rows = [
-  createData('Cupcake', 305, 3.7),
-  createData('Donut', 452, 25.0),
-  createData('Eclair', 262, 16.0),
-  createData('Frozen yoghurt', 159, 6.0),
-  createData('Gingerbread', 356, 16.0),
-  createData('Honeycomb', 408, 3.2),
-  createData('Ice cream sandwich', 237, 9.0),
-  createData('Jelly Bean', 375, 0.0),
-  createData('KitKat', 518, 26.0),
-  createData('Lollipop', 392, 0.2),
-  createData('Marshmallow', 318, 0),
-  createData('Nougat', 360, 19.0),
-  createData('Oreo', 437, 18.0),
-];
+// const rows = [
+//   createData('Cupcake', 305, 3.7),
+//   createData('Donut', 452, 25.0),
+//   createData('Eclair', 262, 16.0),
+//   createData('Frozen yoghurt', 159, 6.0),
+//   createData('Gingerbread', 356, 16.0),
+//   createData('Honeycomb', 408, 3.2),
+//   createData('Ice cream sandwich', 237, 9.0),
+//   createData('Jelly Bean', 375, 0.0),
+//   createData('KitKat', 518, 26.0),
+//   createData('Lollipop', 392, 0.2),
+//   createData('Marshmallow', 318, 0),
+//   createData('Nougat', 360, 19.0),
+//   createData('Oreo', 437, 18.0),
+// ];
 
 function descendingComparator(a, b, orderBy) {
   if (b[orderBy] < a[orderBy]) {
@@ -60,8 +61,6 @@ function getComparator(order, orderBy) {
     : (a, b) => -descendingComparator(a, b, orderBy);
 }
 
-// This method is created for cross-browser compatibility, if you don't
-// need to support IE11, you can use Array.prototype.sort() directly
 function stableSort(array, comparator) {
   const stabilizedThis = array.map((el, index) => [el, index]);
   stabilizedThis.sort((a, b) => {
@@ -114,7 +113,7 @@ function EnhancedTableHead(props) {
         {headCells.map((headCell) => (
           <TableCell
             key={headCell.id}
-            align={headCell.numeric ? 'right' : 'left'}
+            align={headCell.numeric ? 'center' : 'center'}
             padding={headCell.disablePadding ? 'none' : 'normal'}
             sortDirection={orderBy === headCell.id ? order : false}
           >
@@ -175,6 +174,31 @@ export default function Products() {
   const [page, setPage] = useState(0);
   const [dense, setDense] = useState(false);
   const [rowsPerPage, setRowsPerPage] = useState(5);
+  const [rows, setProducts] = useState([]);
+
+  // function refreshProducts(){
+  //   axios.get(`http://localhost:2000/api/v1/products`)
+  //   .then((response)=>{
+  //     setProducts(response.data)
+  //   }).catch((error)=>{
+  //       console.log(error);
+  //   })
+  // }
+
+  function getProducts(){
+    axios.get("http://localhost:2000/api/v1/products")
+      .then((resp)=>{
+        console.log(resp.data);
+        setProducts(resp.data)
+        // refreshProducts();
+      }).catch((error)=>{
+        console.log(error);
+      })
+  }
+  
+  React.useEffect(()=>{
+    getProducts()
+  },[])
 
   const handleRequestSort = (event, property) => {
     const isAsc = orderBy === property && order === 'asc';
@@ -220,12 +244,11 @@ export default function Products() {
                       <TableCell component="th" id={labelId} scope="row" padding="normal">
                         {row.name}
                       </TableCell>
-                      <TableCell align="right">{row.price}</TableCell>
-                      <TableCell align="right">{row.quantity}</TableCell>
-                      <TableCell align="right">
-                        <Button>Edit</Button>
-                        <Button>Delete</Button>
-                        <Button>Active</Button>
+                      <TableCell align="center">{row.price}</TableCell>
+                      <TableCell align="center">{row.quantity ? row.quantity : 'Variants'}</TableCell>
+                      <TableCell align="center">
+                        <EditProduct item={row} />
+                        <DeleteProduct id={row._id}/>
                     </TableCell>
                     </TableRow>
                   );

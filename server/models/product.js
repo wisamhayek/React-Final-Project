@@ -33,7 +33,7 @@ const ProductSchema = mongoose.Schema({
     },
     itemid:{
         type: Number,
-        unique: true
+        // unique: true
         // Random number
     }
     

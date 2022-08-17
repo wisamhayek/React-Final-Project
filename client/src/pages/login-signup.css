@@ -28,7 +28,7 @@
 }
 .loginForm a:link, a:visited {
     text-decoration: none;
-    color:royalblue;
+    color: inherit;
   }
 
 

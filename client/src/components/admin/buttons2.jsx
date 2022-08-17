@@ -53,6 +53,15 @@ export function AddProduct() {
   const [rowsImage, setRowsImg] = useState(Number(1));
   const [variantName,setVariantName] =useState('');
   const [variants,setVariants] =useState('');
+
+  const [variantOptions,setVariantOptions] =useState({
+    option1: "",
+    option2: "",
+    option3: "",
+    option4: "",
+    option5: "",
+  });
+
   const [imageLinks,setImageLinks] =useState({
     imageurl1: "",
     imageurl2: "",
@@ -79,6 +88,10 @@ export function AddProduct() {
     setImageLinks(prev=>({...prev,[e.target.name]:e.target.value}))
   }
 
+  const handleVariantOptions=(e)=>{
+    setVariantOptions(prev=>({...prev,[e.target.name]:e.target.value}))
+  }
+
   const handleProductVariants=(e)=>{
     // console.log(e.target.id);
     let options = e.target.id
@@ -93,7 +106,7 @@ export function AddProduct() {
 
   // console.log(product)
   // console.log(imageLinks)
-  // console.log(variants)
+  console.log(variants)
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -228,6 +241,7 @@ export function AddProduct() {
           <TextField type="number" name="price" size="small" id="price" label="Price" variant="outlined" onChange={handleProductChange}/>
           {!checked &&
           <>
+            
             <TextField type="number" name="quantity" size="small" id="quantity" label="Quantity" variant="outlined" onChange={handleProductChange}/>
           </>
           }
@@ -296,87 +310,3 @@ export function AddProduct() {
 // checkbox for admin UI, if true show the variant options
 // if true it will look inside the "Variant field" for price and quntity
 // if false will take values from the root model
-
-
-
-export function EditProduct({item}) {
-
-  const [open, setOpen] = useState(false);
-  const [price, setPrice] = useState('');
-  const [quantity, setQuantity] = useState('');
-
-  const handleClickOpen = () => {
-    setOpen(true);
-  };
-
-  const handleClose = () => setOpen(false);
-
-
-  const handleUpdate = () => {
-    console.log(item._id);
-    axios.put(`http://localhost:2000/api/v1/product/${item._id}`,{price,quantity})
-    .then((response)=>{
-      console.log(response);
-    }).catch((error)=>{
-      console.log(error);
-    })
-  }
-  const invalid = price === "" && quantity === "";
-
-  return (
-    <Fragment>
-      <Button onClick={handleClickOpen}>Edit</Button>
-    <Dialog open={open} onClose={handleClose}>
-        <DialogTitle>Update Product</DialogTitle>
-        <DialogContent sx={{display:"flex",flexDirection:"column",rowGap:"8px",padding:"16px"}}>
-          <Typography >Price : {item.price}</Typography>
-          <TextField size="small" id="price" label="New Price" variant="outlined" onChange={(e)=>{setPrice(e.target.value)}}/>
-          <Typography>Quantity : {item.quantity}</Typography>
-          <TextField size="small" id="quantity" label="New Quantity" variant="outlined" onChange={(e)=>{setQuantity(e.target.value)}}/>
-        </DialogContent>
-        <DialogActions>
-          <Button onClick={handleClose}>Cancel</Button>
-          <Button disabled={invalid} onClick={()=>{handleUpdate();handleClose()}} variant="contained">Update</Button>
-        </DialogActions>
-      </Dialog>
-    </Fragment>
-  )
-}
-
-
-export function DeleteProduct({id}) {
-
-  const [open, setOpen] = useState(false);
-
-  const handleClickOpen = () => {
-    setOpen(true);
-  };
-
-  const handleClose = () => setOpen(false);
-
-  const handleDelete = () => {
-    console.log(id);
-    axios.delete(`http://localhost:2000/api/v1/product/${id}`)
-    .then((response)=>{
-      console.log(response);
-    }).catch((error)=>{
-      console.log(error);
-    })
-  }
-
-  return (
-    <Fragment>
-      <Button onClick={handleClickOpen}>Delete</Button>
-      <Dialog open={open} onClose={handleClose}>
-        <DialogTitle>Delete Product</DialogTitle>
-        <DialogContent sx={{display:"flex",flexDirection:"column",rowGap:"8px",padding:"16px"}}>
-          <Typography>Are you sure you want to delete this product? This action can't be reverted.</Typography>
-        </DialogContent>
-        <DialogActions>
-          <Button onClick={handleClose}>Cancel</Button>
-          <Button onClick={()=>{handleDelete();handleClose()}} variant="contained">Delete</Button>
-        </DialogActions>
-      </Dialog>
-    </Fragment>
-  )
-}

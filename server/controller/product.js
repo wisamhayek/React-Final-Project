@@ -1,4 +1,5 @@
 const Product = require('../models/product');
+const Category = require('../models/category');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 require('dotenv').config();
@@ -53,18 +54,42 @@ const addProduct = async (req, res) => {
     }
 }
 
+// const getProducts = async (req, res) => {
+//     try {
+
+//         const data = await Product.find()
+
+//         console.log("Total Products: "+data.length);
+//         return res.status(200).json({
+//             message: "Succesfully fetched list of products",
+//             data
+//         })
+//     } catch(error) {
+//         console.log(error);
+//         return res.status(500).json({
+//             message: "There was an error!",
+//             error
+//         })
+//     }
+// }
+
 const getProducts = async (req, res) => {
+    const qNew = req.query.new;
+    const qCategory = req.query.category;
+    console.log(qCategory);
     try {
+      let products;
+  
+      if (qNew) {
+        products = await Product.find().sort({ createdAt: -1 }).limit(1);
+      } else if (qCategory) {
+        products = await Product.find({ category: qCategory});
+      } else {
+        products = await Product.find();
+      }
+      res.status(200).json(products);
 
-        const data = await Product.find()
-
-        console.log("Total Products: "+data.length);
-        return res.status(200).json({
-            message: "Succesfully fetched list of products",
-            data
-        })
     } catch(error) {
-        console.log(error);
         return res.status(500).json({
             message: "There was an error!",
             error
@@ -140,7 +165,7 @@ const updateProductByID = async (req, res) => {
 
 const deleteProductByID = async (req, res) => {
 
-    const productid = req.headers.productod
+    const productid = req.headers.productid
     try {
         const data = await Product.deleteOne({ _id: productid});
         console.log(data);
@@ -156,6 +181,60 @@ const deleteProductByID = async (req, res) => {
     }
 }
 
+const getCategories = async (req, res) => {
+    // const category = req.headers.category;
+
+    try {
+        const data = await Category.find();
+
+        return res.status(200).json({
+            message: "Succesfully fetched list of categories",
+            data
+        })
+    } catch(error) {
+        return res.status(500).json({
+            message: "There was an error!",
+            error
+        })
+    }
+}
+
+
+const addCategories = async (req, res) => {
+
+    // console.log(req.headers);
+    console.log(req.body);
+
+    const title = req.body.title;
+    const img = req.body.img;
+    const id = req.body.id;
+
+    
+    let newCategory = {
+        title: title,
+        img: img,
+        id: id,
+    }
+
+    try {
+
+        const category = new Category(newCategory);
+       
+        const data = await category.save();
+
+        return res.status(200).json({
+            message: "Succesfully added the category",
+            data
+        })
+    } catch(error) {
+        console.log(error);
+        return res.status(500).json({
+            message: "There was an error!",
+            error
+        })
+    }
+}
+
 
 module.exports = {
     getProducts,
@@ -163,5 +242,7 @@ module.exports = {
     getProductsByCat,
     addProduct,
     deleteProductByID,
-    updateProductByID
+    updateProductByID,
+    getCategories,
+    addCategories
 }
