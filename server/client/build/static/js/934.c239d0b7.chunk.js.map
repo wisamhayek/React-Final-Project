@@ -1,0 +1,1 @@
+{"version":3,"file":"static/js/934.c239d0b7.chunk.js","mappings":"uKAEe,SAASA,IACtB,OACE,qCAEH,C","sources":["pages/not-found.js"],"sourcesContent":["import React from 'react'\n\nexport default function NotFound() {\n  return (\n    <div>NotFound</div>\n  )\n}\n"],"names":["NotFound"],"sourceRoot":""}
