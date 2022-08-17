@@ -279,6 +279,10 @@ export default function Cart() {
     }
   }
 
+  // if(userContext?.id){
+
+  // }
+
   // return (
     return cartContext?.length===0 || cartContext === false ? (
       <>
@@ -306,7 +310,7 @@ export default function Cart() {
         </Top>
         <Bottom>
           <Info>
-              {cartContext.map((item,index)=>(
+              {cartContext?.map((item,index)=>(
             <Product key={index}>
               <ProductDetail>
                 <Image src={item.itemid.imageurl.imageurl1} />
