@@ -84,7 +84,7 @@ function clearFilter() {
               value={cat}
               onChange={handleChangeCategory}
             >
-            {categories.map((item,index) => (
+            {categories?.map((item,index) => (
               <FormControlLabel key={index} sx={{color:"white"}} value={item.title} control={<Radio sx={{color:"white"}} />} label={item.title} />
             ))}    
             </RadioGroup>
@@ -120,7 +120,7 @@ function clearFilter() {
               onChange={handleChangeCategory}
             >
               {/* <FormControlLabel sx={{color:"white"}} value="" control={<Radio sx={{color:"white"}} />} label="none" /> */}
-            {categories.map((item,index) => (
+            {categories?.map((item,index) => (
               <FormControlLabel key={index} sx={{color:"white"}} value={item.title} control={<Radio sx={{color:"white"}} />} label={item.title} />
             ))}    
             </RadioGroup>

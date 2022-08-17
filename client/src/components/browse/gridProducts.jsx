@@ -53,7 +53,7 @@ export default function GridProducts({category, sortby}) {
 
   return (
     <>
-    {gridProducts.map((item) => (
+    {gridProducts?.map((item) => (
         <Product item={item} key={item.itemid} />
     ))}
     </>

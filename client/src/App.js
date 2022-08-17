@@ -5,6 +5,7 @@ import {Suspense, lazy} from "react"
 import {BrowserRouter ,Route, Routes} from 'react-router-dom';
 import * as ROUTES from './constants/routes';
 import { GoogleOAuthProvider } from '@react-oauth/google';
+import { createContext } from 'react';
 
 
 const NotFound =lazy(()=> import ('./pages/not-found.js'));
@@ -17,9 +18,9 @@ const Product =lazy(()=> import ('./pages/Product'));
 const Profile =lazy(()=> import ('./pages/Profile'));
 const Checkout =lazy(()=> import ('./pages/Checkout.js'));
 
-export const UserContext = React.createContext();
-export const ProfileContext = React.createContext();
-export const CartContext = React.createContext();
+export const UserContext = createContext();
+export const ProfileContext = createContext();
+export const CartContext = createContext();
 
 function App() {
 

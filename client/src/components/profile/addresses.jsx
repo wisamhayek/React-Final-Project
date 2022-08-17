@@ -13,7 +13,7 @@ export default function Addresses() {
     <Typography variant='h5' sx={{margin:"auto",textAlign:"center", marginBottom:"2rem"}}>Addresses</Typography>
     <Box sx={{width:"80%", margin:"auto",marginBottom:'2rem'}}>
       <Typography variant='h6' sx={{margin:"auto",textAlign:"start", marginBottom:"1rem"}}>Shipping Address :</Typography>
-      {profileContext.profile.shippingAddress && 
+      {profileContext?.profile.shippingAddress && 
       <Box sx={{display: "flex",flexDirection:'row', width: "max-content", textAlign: "start"}}>
         <Box sx={{backgroundColor:"#dedede",width:"fit-content",padding:"2rem",borderRadius:"1rem"}}>
           <Typography>{profileContext.profile.shippingAddress.name}</Typography>
@@ -28,7 +28,7 @@ export default function Addresses() {
         </Box>
       </Box>
       }
-    {!profileContext.profile.shippingAddress && 
+    {!profileContext?.profile.shippingAddress && 
       <Typography variant='h6' sx={{margin:"auto",textAlign:"start", marginTop:"2rem"}}>No shipping address found on file</Typography>
     }
     <AddShippingButton />
@@ -37,7 +37,7 @@ export default function Addresses() {
     <Divider/>
     <Box sx={{width:"80%", margin:"auto",marginTop:"2rem"}}>
       <Typography variant='h6' sx={{margin:"auto",textAlign:"start", marginBottom:"1rem"}}>Billing Address :</Typography>
-      {profileContext.profile.billingAddress && 
+      {profileContext?.profile.billingAddress && 
       <Box sx={{display: "flex",flexDirection:'row', width: "max-content", textAlign: "start"}}>
         <Box sx={{backgroundColor:"#dedede",width:"fit-content",padding:"2rem",borderRadius:"1rem"}}>
         <Typography>{profileContext.profile.billingAddress.name}</Typography>
@@ -52,7 +52,7 @@ export default function Addresses() {
         </Box>
       </Box>
       }
-    {!profileContext.profile.billingAddress &&
+    {!profileContext?.profile.billingAddress &&
       <Typography variant='h6' sx={{margin:"auto",textAlign:"start", marginTop:"2rem"}}>No billing address found on file</Typography>
     }
     <AddBillingButton />
