@@ -8,7 +8,7 @@ import Box from '@mui/material/Box';
 import Orders from './orders.jsx';
 import Sales from './sales.jsx';
 import Products from './products.jsx';
-import Coupons from './coupons.jsx';
+import Promotion from './promotion.jsx';
 import Users from './users.jsx';
 
 
@@ -66,7 +66,7 @@ export default function BasicTabs() {
         <Tab label="Orders" {...a11yProps(0)} />
         <Tab label="Sales" {...a11yProps(1)} />
         <Tab label="Products" {...a11yProps(2)} />
-        <Tab label="Coupons" {...a11yProps(3)} />
+        <Tab label="Promotions" {...a11yProps(3)} />
         <Tab label="Users" {...a11yProps(4)} />
         </Tabs>
       </Box>
@@ -80,7 +80,7 @@ export default function BasicTabs() {
         <Products />
       </TabPanel>
       <TabPanel value={value} index={3}>
-        <Coupons />
+        <Promotion />
       </TabPanel>
       <TabPanel value={value} index={4}>
         <Users />

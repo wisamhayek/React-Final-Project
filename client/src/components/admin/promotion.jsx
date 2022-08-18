@@ -15,34 +15,9 @@ import Typography from '@mui/material/Typography';
 import Paper from '@mui/material/Paper';
 import { visuallyHidden } from '@mui/utils';
 import { Button } from '@mui/material';
-import {AddCoupon} from './buttons.jsx';
+import {AddPromotion, DeletePromotion, EditPromotion} from './buttons.jsx';
+import axios from 'axios';
 
-
-// add Product ID -> Post updates to server
-function createData(name, price, quantity) {
-  return {
-    name,
-    price,
-    quantity
-  };
-}
-
-// Data will fetch from server -> loop through it and create rows
-const rows = [
-  createData('Cupcake', 305, 3.7),
-  createData('Donut', 452, 25.0),
-  createData('Eclair', 262, 16.0),
-  createData('Frozen yoghurt', 159, 6.0),
-  createData('Gingerbread', 356, 16.0),
-  createData('Honeycomb', 408, 3.2),
-  createData('Ice cream sandwich', 237, 9.0),
-  createData('Jelly Bean', 375, 0.0),
-  createData('KitKat', 518, 26.0),
-  createData('Lollipop', 392, 0.2),
-  createData('Marshmallow', 318, 0),
-  createData('Nougat', 360, 19.0),
-  createData('Oreo', 437, 18.0),
-];
 
 function descendingComparator(a, b, orderBy) {
   if (b[orderBy] < a[orderBy]) {
@@ -74,22 +49,28 @@ function stableSort(array, comparator) {
 
 const headCells = [
   {
-    id: 'name',
+    id: 'title',
     numeric: false,
     disablePadding: false,
-    label: 'Name',
+    label: 'Title',
   },
   {
-    id: 'price',
+    id: 'imglink',
     numeric: true,
     disablePadding: false,
-    label: 'Code',
+    label: 'img URL',
   },
   {
-    id: 'quantity',
+    id: 'bgcolor',
     numeric: true,
     disablePadding: false,
-    label: 'Amount',
+    label: 'Background Color',
+  },
+  {
+    id: 'linkto',
+    numeric: true,
+    disablePadding: false,
+    label: 'Link To',
   },
   {
     id: 'actions',
@@ -156,30 +137,38 @@ const EnhancedTableToolbar =()=>{
           id="tableTitle"
           component="div"
         >
-          Coupons Codes
+          Promotions
         </Typography>
 
-        {/* Add Search Input Here -> the search will filter the inital Data (rows now)*/}
-        {/* Add Button to add Products -> open a modal // Button should be in seprate .JSX File */}
-        
-        {/* <Tooltip title="Create Coupon"> */}
-        <AddCoupon />
-          {/* <IconButton color='primary' size="small">
-            Create Coupon
-            <AddIcon />
-          </IconButton> */}
-        {/* </Tooltip> */}
+        <AddPromotion />
+
     </Toolbar>
   );
 };
 
-export default function Coupons() {
+export default function Promotions() {
 
   const [order, setOrder] = useState('asc');
   const [orderBy, setOrderBy] = useState('name');
   const [page, setPage] = useState(0);
   const [dense, setDense] = useState(false);
   const [rowsPerPage, setRowsPerPage] = useState(5);
+  const [rows, setUsers] = useState([]);
+
+
+  function getPromotions(){
+    axios.get("http://localhost:2000/api/v1/promotions",)
+      .then((resp)=>{
+        console.log(resp.data.data);
+        setUsers(resp.data.data);
+      }).catch((error)=>{
+        console.log(error);
+      })
+  }
+
+  React.useEffect(()=>{
+    getPromotions()
+  },[])
 
   const handleRequestSort = (event, property) => {
     const isAsc = orderBy === property && order === 'asc';
@@ -206,7 +195,7 @@ export default function Coupons() {
         <EnhancedTableToolbar />
         <TableContainer>
           <Table
-            sx={{ minWidth: 750 }}
+            sx={{ minWidth: 750,tableLayout: "fixed" }}
             aria-labelledby="tableTitle"
             size={dense ? 'small' : 'medium'}
           >
@@ -221,15 +210,16 @@ export default function Coupons() {
                   const labelId = `enhanced-table-checkbox-${index}`;
 
                   return (
-                    <TableRow hover tabIndex={-1} key={row.name}>
+                    <TableRow hover tabIndex={-1} key={index}>
                       <TableCell component="th" id={labelId} scope="row" padding="normal">
-                        {row.name}
+                        {row.title}
                       </TableCell>
-                      <TableCell align="center">{row.price}</TableCell>
-                      <TableCell align="center">{row.quantity}</TableCell>
+                      <TableCell sx={{wordWrap:"break-word"}} align="center">{row.img}</TableCell>
+                      <TableCell align="center">{row.bg}</TableCell>
+                      <TableCell align="center">{row.linkto}</TableCell>
                       <TableCell align="center">
-                        <Button>Edit</Button>
-                        <Button>Delete</Button>
+                        <EditPromotion item={row}/>
+                        <DeletePromotion id={row._id}/>
                     </TableCell>
                     </TableRow>
                   );

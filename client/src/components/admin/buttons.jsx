@@ -9,7 +9,7 @@ import AddIcon from '@mui/icons-material/Add';
 import Tooltip from '@mui/material/Tooltip';
 import axios from 'axios';
 
-export function AddCoupon() {
+export function AddPromotion() {
 
   const [open, setOpen] = useState(false);
 
@@ -19,25 +19,50 @@ export function AddCoupon() {
 
   const handleClose = () => setOpen(false);
 
+  const [promotion,setPromotion] =useState({
+    title: "",
+    desc: "",
+    img: "",
+    bg: "",
+    linkto: "",
+    id: "",
+  })
+
+  const handlePromotionChange=(e)=>{
+    setPromotion(prev=>({...prev,[e.target.name]:e.target.value}))
+  }
+
+   function savePromotion(){
+    axios.post("http://localhost:2000/api/v1/promotions/",{promotion})
+      .then((resp)=>{
+        // console.log(resp);
+      }).catch((error)=>{
+        console.log(error);
+      })
+  }
+  const invalid = promotion.title === "" || promotion.desc === "" || promotion.img === "" || promotion.bg === "" || promotion.linkto === "" || promotion.id === ""
+
   return (
     <Fragment>
-      <Tooltip title="Create Coupon">
+      <Tooltip title="Create Promotion">
        <IconButton color='primary' size="small" onClick={handleClickOpen}>
-          Create Coupon
+          Create Promotion
         <AddIcon />
         </IconButton>
       </Tooltip>
     <Dialog open={open} onClose={handleClose}>
-        <DialogTitle>Create Coupon</DialogTitle>
+        <DialogTitle>Create Promotion</DialogTitle>
         <DialogContent sx={{display:"flex",flexDirection:"column",rowGap:"8px",padding:"16px"}}>
-          <TextField size="small" id="promotion-name" label="Promotion Name" variant="outlined" sx={{marginTop:"4px"}} />
-          <TextField size="small" id="coupon-code-value" label="Coupon Code" variant="outlined" />
-          <TextField size="small" id="quantity" label="Quantity" variant="outlined" />
-          <TextField size="small" id="discound-percent" label="Percent %" variant="outlined" />
+          <TextField size="small" name="title" id="promotion-title" label="Promotion Title" variant="outlined" sx={{marginTop:"4px"}} onChange={handlePromotionChange}/>
+          <TextField id="promotion-description" name="desc" label="Description" multiline rows={4} variant="outlined" onChange={handlePromotionChange}/>
+          <TextField size="small" name="img" id="image-links" label="Image Link" variant="outlined" onChange={handlePromotionChange}/>
+          <TextField size="small" name="bg" id="bgcolor" label="Background Color" variant="outlined" onChange={handlePromotionChange}/>
+          <TextField size="small" name="linkto" id="linkto" label="Link To" variant="outlined" onChange={handlePromotionChange}/>
+          <TextField size="small" name="id" id="Promotion-id" label="Promotion ID" variant="outlined" onChange={handlePromotionChange}/>
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose}>Cancel</Button>
-          <Button onClick={handleClose} variant="contained">Add Coupon</Button>
+          <Button disabled={invalid} onClick={()=>{savePromotion();handleClose();}} variant="contained">Add Promotion</Button>
         </DialogActions>
       </Dialog>
     </Fragment>
@@ -67,8 +92,6 @@ export function AddProduct() {
     quantity: "",
     category: "",
     isVariant: false,
-    // variants: [],
-    // imageurl: [],
     itemid: "",
   })
 
@@ -274,30 +297,6 @@ export function AddProduct() {
   )
 }
 
-// variants [
-//      Storage: [
-//          title: 256GB
-//          price: 1999
-//          quantity: 4
-//      ]
-// ----- OR -----
-//     size[
-//          title: small
-//          price: 10
-//          quantity: 2
-//     ]
-//     color[
-//          title: Red
-//          price: 12
-//          quantity: 3
-// ]
-
-// OR data model will have isVariant field (boolean)
-// checkbox for admin UI, if true show the variant options
-// if true it will look inside the "Variant field" for price and quntity
-// if false will take values from the root model
-
-
 
 export function EditProduct({item}) {
 
@@ -375,6 +374,111 @@ export function DeleteProduct({id}) {
         <DialogActions>
           <Button onClick={handleClose}>Cancel</Button>
           <Button onClick={()=>{handleDelete();handleClose()}} variant="contained">Delete</Button>
+        </DialogActions>
+      </Dialog>
+    </Fragment>
+  )
+}
+
+
+export function DeletePromotion({id}) {
+
+  const [open, setOpen] = useState(false);
+
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => setOpen(false);
+
+  const handleDelete = () => {
+    console.log(id);
+    axios.delete(`http://localhost:2000/api/v1/promotions/`,{headers: {
+      promotionid: id
+    }})
+    .then((response)=>{
+      console.log(response);
+    }).catch((error)=>{
+      console.log(error);
+    })
+  }
+
+  return (
+    <Fragment>
+      <Button onClick={handleClickOpen}>Delete</Button>
+      <Dialog open={open} onClose={handleClose}>
+        <DialogTitle>Delete Promotion</DialogTitle>
+        <DialogContent sx={{display:"flex",flexDirection:"column",rowGap:"8px",padding:"16px"}}>
+          <Typography>Are you sure you want to delete this promotion? This action can't be reverted.</Typography>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleClose}>Cancel</Button>
+          <Button onClick={()=>{handleDelete();handleClose()}} variant="contained">Delete</Button>
+        </DialogActions>
+      </Dialog>
+    </Fragment>
+  )
+}
+
+
+
+export function EditPromotion({item}) {
+
+  const [open, setOpen] = useState(false);
+  const [promoid, setPromoID] = useState(item._id);
+  const [promotion,setPromotion] =useState({
+    title: item.title,
+    desc: item.desc,
+    img: item.img,
+    bg: item.bg,
+    linkto: item.linkto,
+    id: item.id,
+  })
+
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => setOpen(false);
+
+  const handlePromotionChange=(e)=>{
+    setPromotion(prev=>({...prev,[e.target.name]:e.target.value}))
+  }
+
+
+  const handleUpdate = () => {
+    // console.log(item._id);
+    axios.put(`http://localhost:2000/api/v1/promotions/`,{promotion,promoid})
+    .then((response)=>{
+      console.log(response);
+    }).catch((error)=>{
+      console.log(error);
+    })
+  }
+  const invalid = promotion.title === "" || promotion.desc === "" || promotion.img === "" || promotion.bg === "" || promotion.linkto === "" || promotion.id === ""
+
+  return (
+    <Fragment>
+      <Button onClick={handleClickOpen}>Edit</Button>
+    <Dialog open={open} onClose={handleClose}>
+        <DialogTitle>Update Promotion</DialogTitle>
+        <DialogContent sx={{display:"flex",flexDirection:"column",rowGap:"8px",padding:"16px"}}>
+          <Typography >Title :</Typography>
+          <TextField defaultValue={item.title} size="small" name="title" id="promotion-title" label="Promotion Title" variant="outlined" sx={{marginTop:"4px"}} onChange={handlePromotionChange}/>
+          <Typography>Description :</Typography>
+          <TextField defaultValue={item.desc} id="promotion-description" name="desc" label="Description" multiline rows={4} variant="outlined" onChange={handlePromotionChange}/>
+          <Typography>Image URL :</Typography>
+          <TextField defaultValue={item.img} size="small" name="img" id="image-links" label="Image Link" variant="outlined" onChange={handlePromotionChange}/>
+          <Typography>Background Color :</Typography>
+          <TextField defaultValue={item.bg} size="small" name="bg" id="bgcolor" label="Background Color" variant="outlined" onChange={handlePromotionChange}/>
+          <Typography>Link To :</Typography>
+          <TextField defaultValue={item.linkto} size="small" name="linkto" id="linkto" label="Link To" variant="outlined" onChange={handlePromotionChange}/>
+          <Typography>ID :</Typography>
+          <TextField defaultValue={item.id} size="small" name="id" id="Promotion-id" label="Promotion ID" variant="outlined" onChange={handlePromotionChange}/>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleClose}>Cancel</Button>
+          <Button disabled={invalid} onClick={()=>{handleUpdate();handleClose()}} variant="contained">Update</Button>
         </DialogActions>
       </Dialog>
     </Fragment>
