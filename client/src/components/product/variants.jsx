@@ -39,11 +39,6 @@ export default function Variants({item}) {
 
   let outofstock = chosenItem.length === 0 || chosenItem.quantity === 0
 
-  useEffect(()=>{
-    console.log(chosenItem);
-    console.log(item._id);
-  },[chosenItem])
-
 
   function addToCart(){
     // console.log(id);
@@ -66,7 +61,7 @@ export default function Variants({item}) {
   function refreshCart(){
     axios.get(`/api/v1/profile/${id}`)
     .then((response)=>{
-      console.log(response.data.data.profile.cart);
+      // console.log(response.data.data.profile.cart);
       setCartContext(response.data.data.profile.cart)
     }).catch((error)=>{
         console.log(error);

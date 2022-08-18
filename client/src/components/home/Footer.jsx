@@ -11,6 +11,7 @@ import LinkedInIcon from '@mui/icons-material/LinkedIn';
 
 import styled from "styled-components";
 import { mobile } from "../../constants/responsive";
+import { Link } from 'react-router-dom';
   
   const Container = styled.div`
     display: flex;
@@ -110,22 +111,31 @@ export default function Footer() {
             <SocialIcon color="55ACEE">
                 <TwitterIcon />
             </SocialIcon>
+            <Link to={"/https://github.com/wisamhayek"}>
             <SocialIcon color="000000">
                 <GitHubIcon />
             </SocialIcon>
+            </Link>
+            <Link to={"www.linkedin.com/in/wisam-hayek"}>
             <SocialIcon color="0a66c2">
                 <LinkedInIcon />
             </SocialIcon>
+            </Link>
             </SocialContainer>
         </Left>
         <Center>
             <Title>Useful Links</Title>
             <List>
+            <Link to={"/"}>
             <ListItem>Home</ListItem>
+            </Link>
+            <Link to={"/cart"}>
             <ListItem>Cart</ListItem>
-            <ListItem>My Account</ListItem>
+            </Link>
+            <Link to={"/profile"}>
+            <ListItem>My Profile</ListItem>
+            </Link>
             <ListItem>Order Tracking</ListItem>
-            <ListItem>Wishlist</ListItem>
             <ListItem>Terms</ListItem>
             </List>
         </Center>
