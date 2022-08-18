@@ -17,7 +17,7 @@ export default function Product() {
 
   useEffect(()=>{
     if(id){
-      axios.get(`http://localhost:2000/api/v1/products/${id}`)
+      axios.get(`/api/v1/products/${id}`)
       .then((response)=>{
         // console.log(response.data.data);
         setProduct(response.data.data)

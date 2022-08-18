@@ -54,7 +54,7 @@ export default function Payments() {
   }
 
   function refreshProfile(){
-    axios.get(`http://localhost:2000/api/v1/profile/${ownerid}`)
+    axios.get(`/api/v1/profile/${ownerid}`)
     .then((response)=>{
       setProfileContext(response.data.data)
     }).catch((error)=>{
@@ -64,7 +64,7 @@ export default function Payments() {
 
 
   function updatePayment(){
-    axios.post("http://localhost:2000/api/v1/profile/payment",{ownerid,name,cardNumber,expiry,cvc})
+    axios.post("/api/v1/profile/payment",{ownerid,name,cardNumber,expiry,cvc})
     .then((resp)=>{
       console.log(resp);
       clearFields();

@@ -157,7 +157,7 @@ export default function Promotions() {
 
 
   function getPromotions(){
-    axios.get("http://localhost:2000/api/v1/promotions",)
+    axios.get("/api/v1/promotions",)
       .then((resp)=>{
         console.log(resp.data.data);
         setUsers(resp.data.data);

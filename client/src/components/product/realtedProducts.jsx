@@ -26,7 +26,7 @@ export default function RelatedProduct({item}) {
 
     function fetchRelated(){
         //Fetch category and return/ use the first 4 products -> should return array of objects
-        axios.get(`http://localhost:2000/api/v1/products/?category=${item.category}`)
+        axios.get(`/api/v1/products/?category=${item.category}`)
         .then((response)=>{
             let first4 = response.data.splice(0,4);
             // console.log(first4);

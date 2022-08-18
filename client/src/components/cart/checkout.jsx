@@ -16,8 +16,8 @@ export default function CheckoutButton() {
   function stripePay(e){
       e.preventDefault()
       console.log("clicked");
-      // axios.post("http://localhost:2000/create-checkout-session",{price,quantity})
-      axios.post("http://localhost:2000/create-checkout-session")
+      // axios.post("/create-checkout-session",{price,quantity})
+      axios.post("/create-checkout-session")
       .then((resp)=>{
         if (resp.data.url) {
           window.location.href = resp.data.url;

@@ -205,7 +205,7 @@ export function AddProduct() {
   };
 
   function saveProduct(){
-    axios.post("http://localhost:2000/api/v1/products/",{product,imageLinks,variantName,variants,checked})
+    axios.post("/api/v1/products/",{product,imageLinks,variantName,variants,checked})
       .then((resp)=>{
         console.log(resp);
         // clearField();

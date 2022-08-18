@@ -179,7 +179,7 @@ export default function Cart() {
 
   useEffect(()=>{
     if(userContext?.id){
-      axios.get(`http://localhost:2000/api/v1/profile/${id}`)
+      axios.get(`/api/v1/profile/${id}`)
       .then((response)=>{
       setCartContext(response.data.data.profile.cart)
       }).catch((error)=>{
@@ -189,7 +189,7 @@ export default function Cart() {
   },[userContext])
 
   function refreshCart(){
-    axios.get(`http://localhost:2000/api/v1/profile/${id}`)
+    axios.get(`/api/v1/profile/${id}`)
     .then((response)=>{
       setCartContext(response.data.data.profile.cart)
     }).catch((error)=>{
@@ -201,8 +201,8 @@ export default function Cart() {
   function stripePay(e){
     e.preventDefault()
     // console.log(cartContext);
-    // axios.post("http://localhost:2000/create-checkout-session",{price,quantity})
-    axios.post("http://localhost:2000/create-checkout-session",{subtotal,cartContext})
+    // axios.post("/create-checkout-session",{price,quantity})
+    axios.post("/create-checkout-session",{subtotal,cartContext})
     .then((resp)=>{
       if (resp.data.url) {
         window.location.href = resp.data.url;
@@ -229,7 +229,7 @@ export default function Cart() {
 
   function incQuantity(itemid,quantity){
     let newQuantity = quantity+1;
-    axios.put(`http://localhost:2000/api/v1/profile/cart`,{
+    axios.put(`/api/v1/profile/cart`,{
       ownerid: id,
       itemid: itemid,
       quantity: newQuantity
@@ -247,7 +247,7 @@ export default function Cart() {
     let newQuantity = quantity-1;
 
     if (newQuantity === 0) {
-      axios.delete(`http://localhost:2000/api/v1/profile/cart`,{
+      axios.delete(`/api/v1/profile/cart`,{
         headers:{
           ownerid: id,
           itemid: itemid,
@@ -260,7 +260,7 @@ export default function Cart() {
         console.log(error);
       })
     } else {
-      axios.put(`http://localhost:2000/api/v1/profile/cart`,{
+      axios.put(`/api/v1/profile/cart`,{
         ownerid: id,
         itemid: itemid,
         quantity: newQuantity

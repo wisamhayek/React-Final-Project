@@ -10,7 +10,7 @@ export default function ByCategory() {
 
     function fetchCategories(){
         //Fetch category and return/ use the first 4
-        axios.get(`http://localhost:2000/api/v1/category`)
+        axios.get(`/api/v1/category`)
         .then((response)=>{
             let first4 = response.data.data.splice(0,4);
             // console.log(first4);

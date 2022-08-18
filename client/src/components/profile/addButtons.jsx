@@ -52,7 +52,7 @@ export function AddShippingButton() {
 
     // Refresh the Profile Context after updating
     function refreshProfile(){
-      axios.get(`http://localhost:2000/api/v1/profile/${ownerid}`)
+      axios.get(`/api/v1/profile/${ownerid}`)
       .then((response)=>{
         setProfileContext(response.data.data)
       }).catch((error)=>{
@@ -61,7 +61,7 @@ export function AddShippingButton() {
     }
 
     function updateShipping(){
-      axios.post("http://localhost:2000/api/v1/profile/shipping",{ownerid,name,address1,address2,city,zipcode,province,checked})
+      axios.post("/api/v1/profile/shipping",{ownerid,name,address1,address2,city,zipcode,province,checked})
       .then((resp)=>{
         console.log(resp);
         clearFields();
@@ -141,7 +141,7 @@ export function AddBillingButton() {
     }
 
     function refreshProfile(){
-      axios.get(`http://localhost:2000/api/v1/profile/${ownerid}`)
+      axios.get(`/api/v1/profile/${ownerid}`)
       .then((response)=>{
         setProfileContext(response.data.data)
       }).catch((error)=>{
@@ -150,7 +150,7 @@ export function AddBillingButton() {
     }
 
     function updateBilling(){
-      axios.post("http://localhost:2000/api/v1/profile/billing",{ownerid,name,address1,address2,city,zipcode,province})
+      axios.post("/api/v1/profile/billing",{ownerid,name,address1,address2,city,zipcode,province})
       .then((resp)=>{
         console.log(resp);
         clearFields();
@@ -233,7 +233,7 @@ export function EditShippingButton() {
 
   // Refresh the Profile Context after updating
   function refreshProfile(){
-    axios.get(`http://localhost:2000/api/v1/profile/${ownerid}`)
+    axios.get(`/api/v1/profile/${ownerid}`)
     .then((response)=>{
       setProfileContext(response.data.data)
     }).catch((error)=>{
@@ -242,7 +242,7 @@ export function EditShippingButton() {
   }
 
   function updateShipping(){
-    axios.post("http://localhost:2000/api/v1/profile/shipping",{ownerid,name,address1,address2,city,zipcode,province,checked})
+    axios.post("/api/v1/profile/shipping",{ownerid,name,address1,address2,city,zipcode,province,checked})
     .then((resp)=>{
       console.log(resp);
       clearFields();
@@ -307,7 +307,7 @@ export function DeleteShippingButton() {
 
   // Refresh the Profile Context after updating
   function refreshProfile(){
-    axios.get(`http://localhost:2000/api/v1/profile/${ownerid}`)
+    axios.get(`/api/v1/profile/${ownerid}`)
     .then((response)=>{
       setProfileContext(response.data.data)
     }).catch((error)=>{
@@ -316,7 +316,7 @@ export function DeleteShippingButton() {
   }
 
   function deleteShipping(){
-    axios.delete("http://localhost:2000/api/v1/profile/shipping",{data: {ownerid:ownerid}})
+    axios.delete("/api/v1/profile/shipping",{data: {ownerid:ownerid}})
     .then((resp)=>{
       console.log(resp);
       refreshProfile();
@@ -383,7 +383,7 @@ export function EditBillingButton() {
 
   // Refresh the Profile Context after updating
   function refreshProfile(){
-    axios.get(`http://localhost:2000/api/v1/profile/${ownerid}`)
+    axios.get(`/api/v1/profile/${ownerid}`)
     .then((response)=>{
       setProfileContext(response.data.data)
     }).catch((error)=>{
@@ -392,7 +392,7 @@ export function EditBillingButton() {
   }
 
   function updateBilling(){
-    axios.post("http://localhost:2000/api/v1/profile/billing",{ownerid,name,address1,address2,city,zipcode,province})
+    axios.post("/api/v1/profile/billing",{ownerid,name,address1,address2,city,zipcode,province})
     .then((resp)=>{
       console.log(resp);
       clearFields();
@@ -450,7 +450,7 @@ export function DeleteBillingButton() {
 
   // Refresh the Profile Context after updating
   function refreshProfile(){
-    axios.get(`http://localhost:2000/api/v1/profile/${ownerid}`)
+    axios.get(`/api/v1/profile/${ownerid}`)
     .then((response)=>{
       setProfileContext(response.data.data)
     }).catch((error)=>{
@@ -459,7 +459,7 @@ export function DeleteBillingButton() {
   }
 
   function deleteBilling(){
-    axios.delete("http://localhost:2000/api/v1/profile/billing",{data: {ownerid:ownerid}})
+    axios.delete("/api/v1/profile/billing",{data: {ownerid:ownerid}})
     .then((resp)=>{
       console.log(resp);
       refreshProfile();
@@ -506,7 +506,7 @@ export function DeletePaymnetButton() {
 
   // Refresh the Profile Context after updating
   function refreshProfile(){
-    axios.get(`http://localhost:2000/api/v1/profile/${ownerid}`)
+    axios.get(`/api/v1/profile/${ownerid}`)
     .then((response)=>{
       setProfileContext(response.data.data)
     }).catch((error)=>{
@@ -515,7 +515,7 @@ export function DeletePaymnetButton() {
   }
 
   function deletePaymnet(){
-    axios.delete("http://localhost:2000/api/v1/profile/payment",{data: {ownerid:ownerid}})
+    axios.delete("/api/v1/profile/payment",{data: {ownerid:ownerid}})
     .then((resp)=>{
       console.log(resp);
       refreshProfile();

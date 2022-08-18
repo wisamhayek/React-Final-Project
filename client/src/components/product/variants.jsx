@@ -49,7 +49,7 @@ export default function Variants({item}) {
     // console.log(id);
     // console.log(chosenItem);
     // console.log(item._id);
-    axios.post(`http://localhost:2000/api/v1/profile/cart`,{
+    axios.post(`/api/v1/profile/cart`,{
       ownerid: id,
       itemid: item._id,
       quantity: 1,
@@ -64,7 +64,7 @@ export default function Variants({item}) {
 
 
   function refreshCart(){
-    axios.get(`http://localhost:2000/api/v1/profile/${id}`)
+    axios.get(`/api/v1/profile/${id}`)
     .then((response)=>{
       console.log(response.data.data.profile.cart);
       setCartContext(response.data.data.profile.cart)

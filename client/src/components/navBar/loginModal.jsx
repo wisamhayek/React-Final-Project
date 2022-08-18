@@ -59,7 +59,7 @@ export default function LoginModal({text}) {
       // console.log(e);
       let userToken = e.credential;
       // console.log(userToken);
-      axios.post("http://localhost:2000/api/google/login",{
+      axios.post("/api/google/login",{
         userToken
         }).then((response)=>{
         // console.log(response.data.message);
@@ -77,7 +77,7 @@ export default function LoginModal({text}) {
     //Login
     const submitForm = (e) => {
         e.preventDefault();
-        axios.post("http://localhost:2000/api/v1/users/login",{
+        axios.post("/api/v1/users/login",{
         email,
         password
         }).then((response)=>{
@@ -95,7 +95,7 @@ export default function LoginModal({text}) {
     //Signup
     const submitForm1 = (e) => {
         e.preventDefault();
-        axios.post("http://localhost:2000/api/v1/users/signup",{
+        axios.post("/api/v1/users/signup",{
           name,
           email,
           password

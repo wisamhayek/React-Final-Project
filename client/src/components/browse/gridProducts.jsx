@@ -11,7 +11,7 @@ export default function GridProducts({category, sortby}) {
     useEffect(()=>{
       if(category){
         // console.log(category);
-        axios.get(`http://localhost:2000/api/v1/products?category=${category}`)
+        axios.get(`/api/v1/products?category=${category}`)
         .then((response)=>{
         // console.log(response.data);
           setGridProducts(response.data)
@@ -21,7 +21,7 @@ export default function GridProducts({category, sortby}) {
   
       }else{
         // console.log("no category chosen");
-        axios.get(`http://localhost:2000/api/v1/products`)
+        axios.get(`/api/v1/products`)
         .then((response)=>{
           // console.log(response.data);
           setGridProducts(response.data)

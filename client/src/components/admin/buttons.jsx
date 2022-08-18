@@ -33,7 +33,7 @@ export function AddPromotion() {
   }
 
    function savePromotion(){
-    axios.post("http://localhost:2000/api/v1/promotions/",{promotion})
+    axios.post("/api/v1/promotions/",{promotion})
       .then((resp)=>{
         // console.log(resp);
       }).catch((error)=>{
@@ -215,7 +215,7 @@ export function AddProduct() {
   };
 
   function saveProduct(){
-    axios.post("http://localhost:2000/api/v1/products/",{product,imageLinks,variantName,variants,checked})
+    axios.post("/api/v1/products/",{product,imageLinks,variantName,variants,checked})
       .then((resp)=>{
         console.log(resp);
         // clearField();
@@ -313,7 +313,7 @@ export function EditProduct({item}) {
 
   const handleUpdate = () => {
     console.log(item._id);
-    axios.put(`http://localhost:2000/api/v1/product/${item._id}`,{price,quantity})
+    axios.put(`/api/v1/product/${item._id}`,{price,quantity})
     .then((response)=>{
       console.log(response);
     }).catch((error)=>{
@@ -355,7 +355,7 @@ export function DeleteProduct({id}) {
 
   const handleDelete = () => {
     console.log(id);
-    axios.delete(`http://localhost:2000/api/v1/product/${id}`)
+    axios.delete(`/api/v1/product/${id}`)
     .then((response)=>{
       console.log(response);
     }).catch((error)=>{
@@ -393,7 +393,7 @@ export function DeletePromotion({id}) {
 
   const handleDelete = () => {
     console.log(id);
-    axios.delete(`http://localhost:2000/api/v1/promotions/`,{headers: {
+    axios.delete(`/api/v1/promotions/`,{headers: {
       promotionid: id
     }})
     .then((response)=>{
@@ -448,7 +448,7 @@ export function EditPromotion({item}) {
 
   const handleUpdate = () => {
     // console.log(item._id);
-    axios.put(`http://localhost:2000/api/v1/promotions/`,{promotion,promoid})
+    axios.put(`/api/v1/promotions/`,{promotion,promoid})
     .then((response)=>{
       console.log(response);
     }).catch((error)=>{

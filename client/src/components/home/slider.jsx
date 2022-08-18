@@ -111,7 +111,7 @@ const Slider = () => {
 
   function fetchPromotions(){
     //Fetch category and return/ use the first 4
-    axios.get(`http://localhost:2000/api/v1/promotions`)
+    axios.get(`/api/v1/promotions`)
     .then((response)=>{
       // console.log(response.data.data);
       setSlideItems(response.data.data);

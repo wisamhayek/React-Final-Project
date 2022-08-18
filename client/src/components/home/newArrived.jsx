@@ -19,7 +19,7 @@ export default function NewArrived() {
 
   function fetchNew(){
       //Fetch category and return/ use the first 4 products -> should return array of objects
-      axios.get(`http://localhost:2000/api/v1/products/`)
+      axios.get(`/api/v1/products/`)
       .then((response)=>{
           let first4 = response.data.splice(0,4);
           // console.log(first4);

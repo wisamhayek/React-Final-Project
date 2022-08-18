@@ -33,7 +33,7 @@ export default function Browse() {
 
   function fetchCategories(){
     //Fetch category and return/ use the first 4
-    axios.get(`http://localhost:2000/api/v1/category`)
+    axios.get(`/api/v1/category`)
     .then((response)=>{
         let data = response.data.data;
         setCategories(data);

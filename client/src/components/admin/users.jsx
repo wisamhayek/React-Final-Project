@@ -153,7 +153,7 @@ export default function Users() {
   const [rows, setUsers] = useState([]);
 
   function getUsers(){
-    axios.get("http://localhost:2000/api/v1/users",{headers: {
+    axios.get("/api/v1/users",{headers: {
       id: id
     }})
       .then((resp)=>{

@@ -17,7 +17,7 @@ export default function Profile() {
 
   useEffect(()=>{
     if(userContext?.id){
-      axios.get(`http://localhost:2000/api/v1/profile/${id}`)
+      axios.get(`/api/v1/profile/${id}`)
       .then((response)=>{
       // console.log(response.data.message);
       // console.log(response.data.data);

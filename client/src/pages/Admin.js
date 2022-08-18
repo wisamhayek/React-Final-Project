@@ -12,7 +12,7 @@ export default function Admin() {
   const id = userContext?.id;
 
   function checkAdmin(userid){
-    axios.get(`http://localhost:2000/api/v1/users/${userid}`)
+    axios.get(`/api/v1/users/${userid}`)
         .then((response)=>{
         if(response.data.data.isAdmin === true){
           setAdmin(true)

@@ -62,7 +62,7 @@ export default function Asynchronous() {
   const loading = open && options.length === 0;
 
   function fetchProducts(){
-    axios.get(`http://localhost:2000/api/v1/products`)
+    axios.get(`/api/v1/products`)
     .then((response)=>{
         console.log(response.data);
         setOptions(response.data)
