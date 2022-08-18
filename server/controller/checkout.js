@@ -1,7 +1,7 @@
 // PORT here is different than the server 3000 instead 2000
 const PORT = process.env.PORT || 3000;
 const stripe = require('stripe')('sk_test_51LTIFKLKQTPL6CL94CQQPo12m5U21TtXd9ZABoYyvcwU5rOHazpbefvjFkpiDwjx0ws4cTaLZQQI8jJoNYPDWcDr00aLNMyjkG');
-const YOUR_DOMAIN = `${PORT}`;
+const YOUR_DOMAIN = "https://wtfinalproject.herokuapp.com";
 
 async function payStripe(req , res) {
     
