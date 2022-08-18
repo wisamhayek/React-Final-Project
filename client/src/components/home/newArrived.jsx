@@ -22,7 +22,7 @@ export default function NewArrived() {
       axios.get(`http://localhost:2000/api/v1/products/`)
       .then((response)=>{
           let first4 = response.data.splice(0,4);
-          console.log(first4);
+          // console.log(first4);
           setRelated(first4);
       }).catch((error)=>{
           console.log(error);

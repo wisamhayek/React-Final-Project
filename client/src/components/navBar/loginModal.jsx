@@ -29,7 +29,7 @@ const style = {
   borderRadius: "1rem"
 };
 
-export default function LoginModal() {
+export default function LoginModal({text}) {
 
 
     const {userContext, setUserContext} = useContext(UserContext)
@@ -56,13 +56,13 @@ export default function LoginModal() {
 
     // Login / Signup with Google
     const handleGoogle =(e)=>{
-      console.log(e);
+      // console.log(e);
       let userToken = e.credential;
-      console.log(userToken);
+      // console.log(userToken);
       axios.post("http://localhost:2000/api/google/login",{
         userToken
         }).then((response)=>{
-        console.log(response.data.message);
+        // console.log(response.data.message);
         setUserContext(response.data.user)
         localStorage.setItem('activeUser', JSON.stringify(response.data.user))
         localStorage.setItem('userToken', JSON.stringify(response.data.token))
@@ -81,14 +81,14 @@ export default function LoginModal() {
         email,
         password
         }).then((response)=>{
-        console.log(response.data.message);
+        // console.log(response.data.message);
         setUserContext(response.data.user)
         localStorage.setItem('activeUser', JSON.stringify(response.data.user))
         localStorage.setItem('userToken', JSON.stringify(response.data.token))
         handleClose();
         }).catch((error)=>{
             setError(error.response.data.message)
-            console.log(error);
+            // console.log(error);
         })
     }
 
@@ -100,7 +100,7 @@ export default function LoginModal() {
           email,
           password
         }).then((response)=>{
-          console.log(response.data.message);
+          // console.log(response.data.message);
           setUserContext(response.data.user)
           localStorage.setItem('activeUser', JSON.stringify(response.data.user))
           localStorage.setItem('userToken', JSON.stringify(response.data.token))
@@ -139,8 +139,8 @@ export default function LoginModal() {
   return (
     <div>
         
-      <Button  color="inherit" onClick={handleOpen} sx={{display: {xs: "none", md: "flex"}}}>Login/Signup</Button>
-      <Button  color="inherit" onClick={handleOpen} sx={{display: {xs: "flex", md: "none"}}}>Login</Button>
+      <Button  color="inherit" onClick={handleOpen} sx={{display: {xs: "none", md: "flex"}}}>{text ? text: "Login/Signup"}</Button>
+      <Button  color="inherit" onClick={handleOpen} sx={{display: {xs: "flex", md: "none"}}}>{text ? text: "Login"}</Button>
       <Modal
         open={open}
         onClose={handleClose}
