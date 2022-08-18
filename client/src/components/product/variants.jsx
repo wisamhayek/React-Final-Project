@@ -111,9 +111,11 @@ export default function Variants({item}) {
       {/* Price & Cart */}
       <Box sx={{marginTop:"3rem",display:"flex",flexDirection:"row", justifyContent:"space-between"}}>
         <Typography variant='h5'>{item.price}$</Typography>
-        <Button disabled={outofstock} variant='contained' onClick={()=>{
-          addCartButton();
-        }}>Add to Cart</Button>
+        {userContext?.id ? 
+          <Button variant='contained' onClick={()=>{addCartButton()}}>Add to Cart</Button>
+        :
+          <LoginModal text="Login to add to cart"/>
+        }
       </Box>
       </Box>
 

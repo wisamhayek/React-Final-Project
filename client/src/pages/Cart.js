@@ -221,7 +221,7 @@ export default function Cart() {
   }
 
   useEffect(()=>{
-    if(cartContext.length > 0){
+    if(cartContext?.length > 0){
       getSubtotal();
     }
   },[cartContext])
