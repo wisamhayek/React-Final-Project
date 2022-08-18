@@ -181,8 +181,6 @@ export default function Cart() {
     if(userContext?.id){
       axios.get(`http://localhost:2000/api/v1/profile/${id}`)
       .then((response)=>{
-      // console.log(response.data.message);
-      // console.log(response.data.data.profile.cart);
       setCartContext(response.data.data.profile.cart)
       }).catch((error)=>{
           console.log(error);
@@ -193,7 +191,6 @@ export default function Cart() {
   function refreshCart(){
     axios.get(`http://localhost:2000/api/v1/profile/${id}`)
     .then((response)=>{
-      // console.log(response.data.data.profile.cart);
       setCartContext(response.data.data.profile.cart)
     }).catch((error)=>{
       console.log(error);
@@ -203,9 +200,7 @@ export default function Cart() {
 
   function stripePay(e){
     e.preventDefault()
-    // console.log("clicked");
-    // console.log(subtotal);
-    console.log(cartContext);
+    // console.log(cartContext);
     // axios.post("http://localhost:2000/create-checkout-session",{price,quantity})
     axios.post("http://localhost:2000/create-checkout-session",{subtotal,cartContext})
     .then((resp)=>{

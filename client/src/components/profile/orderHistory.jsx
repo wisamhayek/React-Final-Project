@@ -1,12 +1,18 @@
 import { Box, Button, Typography } from '@mui/material'
 // import { borderTop } from '@mui/system'
-import React, { Fragment } from 'react'
+import React, { Fragment, useContext } from 'react'
+import { ProfileContext } from '../../App'
 
 export default function OrderHistory() {
+
+  const {profileContext, setProfileContext} = useContext(ProfileContext)
+
   return (
     <Fragment>
     <Typography variant='h5' sx={{margin:"auto",textAlign:"center",marginBottom: "2rem"}}>Order History</Typography>
 
+    {profileContext?.profile.orders && 
+    <>
     {/* Desktop View */}
     <Box sx={{margin:"auto",textAlign:"center",display: {xs: "none", md: "grid"},gridTemplateColumns:" 40% 60%", borderTop:"1px solid gray", borderBottom:"1px solid gray"}}>
       <div>
@@ -48,6 +54,12 @@ export default function OrderHistory() {
       </div>
     </div>
     </Box>
+    </>
+    }
+
+    {!profileContext?.profile.orders &&
+      <Typography variant='h5' sx={{margin:"auto",textAlign:"start", marginTop:"2rem"}}>No orders found on file</Typography>
+    }
     </Fragment>
   )
 }

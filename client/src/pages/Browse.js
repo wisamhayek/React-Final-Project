@@ -7,13 +7,12 @@ import Drawer from '@mui/material/Drawer';
 import { useParams } from 'react-router-dom'
 import GridProducts from '../components/browse/gridProducts'
 import axios from 'axios';
-// import { useNavigate } from "react-router-dom";
-
+import { useNavigate } from "react-router-dom";
 
 
 export default function Browse() {
 
-  // const navigate = useNavigate();
+  const navigate = useNavigate();
 
   const {cat} = useParams()
 
@@ -30,7 +29,7 @@ export default function Browse() {
   };
 
   const [categories,setCategories] = useState([])
-  const [selectedValue, setSelectedValue] = useState(cat);
+  // const [selectedValue, setSelectedValue] = useState(cat);
 
   function fetchCategories(){
     //Fetch category and return/ use the first 4
@@ -47,14 +46,19 @@ useEffect(()=>{
     fetchCategories();
 },[]) 
 
+// useEffect(()=>{
+//   setSelectedValue(cat);
+// },[cat]) 
+
 const handleChangeCategory = (event) => {
-  console.log(event.target.value);
-  // navigate(`/browse/${event.target.value}`)
-  setSelectedValue(event.target.value);
+  // console.log(event.target.value);
+  navigate(`/browse/${event.target.value}`)
+  // setSelectedValue(event.target.value);
 };
 
 function clearFilter() {
-  setSelectedValue("");
+  // setSelectedValue("");
+  navigate(`/browse/`)
 };
 
   //Drawer Design/List
@@ -116,7 +120,8 @@ function clearFilter() {
               defaultValue=""
               name="radio-buttons-group"
               color='white'
-              value={cat}
+              // value={selectedValue ? selectedValue: ""}
+              value={cat ? cat: ""}
               onChange={handleChangeCategory}
             >
               {/* <FormControlLabel sx={{color:"white"}} value="" control={<Radio sx={{color:"white"}} />} label="none" /> */}
@@ -152,8 +157,8 @@ function clearFilter() {
             </Box>
           </Box>
           <Box className='productGrid' sx={{display:"grid",gridTemplateColumns:{xs: "1fr", md:"1fr 1fr 1fr"},width:{xs:"-webkit-fill-available",md:"100%"},margin:"auto",rowGap:"1rem",columnGap:{xs:"0px",md:"1%"},padding:"10px"}}>
-          <GridProducts category={selectedValue ? selectedValue : ""} sortby={sortby}/>
-          {/* <GridProducts category={cat} sortby={sortby}/> */}
+          <GridProducts category={cat ? cat : ""} sortby={sortby}/>
+          {/* <GridProducts category={selectedValue ? selectedValue : ""} sortby={sortby}/> */}
         </Box>
         </Box>
       </Box>

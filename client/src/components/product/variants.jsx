@@ -4,6 +4,7 @@ import axios from 'axios';
 import React, { Fragment, useContext, useEffect, useState } from 'react'
 // import styled from 'styled-components';
 import { CartContext, UserContext } from '../../App';
+import LoginModal from '../navBar/loginModal';
 // import ColorButton from './buttons'
 
 // const StyledButton = styled(Button)`
@@ -130,7 +131,11 @@ export default function Variants({item}) {
       {/* Price & Cart */}
       <Box sx={{marginTop:"3rem",display:"flex",flexDirection:"row", justifyContent:"space-between"}}>
         <Typography variant='h5'>{item.price}$</Typography>
-        <Button variant='contained' onClick={()=>{addCartButton()}}>Add to Cart</Button>
+        {userContext?.id ? 
+          <Button variant='contained' onClick={()=>{addCartButton()}}>Add to Cart</Button>
+        :
+          <LoginModal text="Login to add to cart"/>
+        }
       </Box>
       </Box>
     }

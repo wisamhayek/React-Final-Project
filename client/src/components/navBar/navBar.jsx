@@ -26,8 +26,9 @@ import SearchAppBar from './search';
 import { CartContext, ProfileContext, UserContext } from '../../App';
 import LoginModal from './loginModal';
 import { googleLogout } from '@react-oauth/google';
+// import Asynchronous from './searchInput';
 
-const pages = ['Home', 'Browse', 'Contact'];
+const pages = ['Home', 'Browse'];
 const settings = ['Profile', 'Logout'];
 
 const ResponsiveAppBar = () => {
@@ -87,9 +88,9 @@ const ResponsiveAppBar = () => {
         if(e === "BROWSE" || e === "Browse"){
             navigate(ROUTES.BROWSE)
         }
-        if(e === "CONTACT" || e === "Contact"){
-            navigate(ROUTES.HOME)
-        }
+        // if(e === "CONTACT" || e === "Contact"){
+        //     navigate(ROUTES.HOME)
+        // }
     }
 
 
@@ -121,8 +122,7 @@ const ResponsiveAppBar = () => {
             onKeyDown={toggleDrawer(anchor, false)}
         >
             {/* <Typography  sx={{textAlign: "center",padding: "1rem"}}>Hotels Logo</Typography> */}
-        <Typography variant="h6" noWrap 
-            // component="a" href="/"
+        <Typography variant="h6" noWrap
             sx={{
                 textAlign: "center",
                 padding: "1rem",
@@ -160,8 +160,8 @@ const ResponsiveAppBar = () => {
             <Typography
                 variant="h6"
                 noWrap
-                // component="a"
-                // href="/"
+                component="a"
+                href="/"
                 sx={{
                 mr: 2,
                 display: { xs: 'none', md: 'flex' },
@@ -170,6 +170,7 @@ const ResponsiveAppBar = () => {
                 letterSpacing: '.3rem',
                 color: 'inherit',
                 textDecoration: 'none',
+                cursor: "pointer"
                 }}
             >
                 LOGO
@@ -195,7 +196,7 @@ const ResponsiveAppBar = () => {
                 variant="h5"
                 noWrap
                 component="a"
-                href=""
+                href="/"
                 sx={{
                 mr: 2,
                 display: { xs: 'none', md: 'none' },
@@ -231,6 +232,7 @@ const ResponsiveAppBar = () => {
             {/* Search Bar Section */}
             <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'flex' } }}>
                 <SearchAppBar />
+                {/* <Asynchronous /> */}
             </Box>
 
             

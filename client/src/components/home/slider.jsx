@@ -1,8 +1,11 @@
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
-import { useState } from "react";
+import { Typography } from '@mui/material';
+import axios from 'axios';
+import { useEffect, useState } from "react";
+import { useNavigate } from 'react-router-dom';
 import styled from "styled-components";
-import { sliderItems } from "../../constants/metaData";
+// import { sliderItems } from "../../constants/metaData";
 import { mobile } from "../../constants/responsive";
 
 const Container = styled.div`
@@ -10,9 +13,9 @@ const Container = styled.div`
   height: 100vh;
   display: flex;
   position: relative;
-  overflow: hidden;  
+  overflow: hidden;
+  ${mobile({ height: "" })}
 `;
-// ${mobile({ display: "none" })}
 
 const Arrow = styled.div`
   width: 50px;
@@ -47,14 +50,17 @@ const Slide = styled.div`
   grid-template-columns: 1fr 1fr;
   align-items: center;
   background-color: #${(props) => props.bg};
+  ${mobile({ height: "auto" })}
 `;
 
 const ImgContainer = styled.div`
   height: 100%;
+  ${mobile({ display: "none" })}
 `;
 
 const Image = styled.img`
   height: 80%;
+  ${mobile({ display: "none" })}
 `;
 // object-fit: cover;
 
@@ -82,7 +88,9 @@ const Button = styled.button`
 `;
 
 const Slider = () => {
+  const navigate = useNavigate();
 
+  const [sliderItems, setSlideItems] = useState("");
   const [slideIndex, setSlideIndex] = useState(0);
 
   function nextSlide(){
@@ -101,7 +109,25 @@ const Slider = () => {
     }
   }
 
+  function fetchPromotions(){
+    //Fetch category and return/ use the first 4
+    axios.get(`http://localhost:2000/api/v1/promotions`)
+    .then((response)=>{
+      // console.log(response.data.data);
+      setSlideItems(response.data.data);
+    }).catch((error)=>{
+        console.log(error);
+    })
+  }
+  
+  useEffect(()=>{
+    fetchPromotions();
+  },[])
+
+
   return (
+    <>
+    {sliderItems.length>0 &&
     <Container>
       <Arrow direction="left" onClick={() => prevSlide()}>
         <ChevronLeftIcon />
@@ -115,7 +141,7 @@ const Slider = () => {
             <InfoContainer>
               <Title>{item.title}</Title>
               <Desc>{item.desc}</Desc>
-              <Button>SHOW NOW</Button>
+              <Button onClick={()=>{navigate(`/${item.linkto}`)}}>SHOW NOW</Button>
             </InfoContainer>
           </Slide>
         ))}
@@ -124,6 +150,8 @@ const Slider = () => {
         <ChevronRightIcon />
       </Arrow>
     </Container>
+    }
+    </>
   );
 };
 

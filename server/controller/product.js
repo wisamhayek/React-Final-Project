@@ -8,7 +8,7 @@ require('dotenv').config();
 const addProduct = async (req, res) => {
 
     // console.log(req.headers);
-    console.log(req.body);
+    // console.log(req.body);
 
     const name = req.body.product.name;
     const description = req.body.product.description;
@@ -76,7 +76,7 @@ const addProduct = async (req, res) => {
 const getProducts = async (req, res) => {
     const qNew = req.query.new;
     const qCategory = req.query.category;
-    console.log(qCategory);
+    // console.log(qCategory);
     try {
       let products;
   
@@ -146,7 +146,7 @@ const updateProductByID = async (req, res) => {
     const newImgURL = req.body.imgurl; // Array Push to it
     const newReview = req.body.review; // Array Push to it
 
-    console.log(req.body);
+    // console.log(req.body);
 
     try {
         const updateProduct = await Product.updateOne({ _id: productid},{ $set: { "name" : newName, "description" : newDesc, "price" : newPrice, "quantity" : newQuantity, "category" : newCategory, "imgURL" : newImgURL,  "reviews" : newReview } });
@@ -168,7 +168,7 @@ const deleteProductByID = async (req, res) => {
     const productid = req.headers.productid
     try {
         const data = await Product.deleteOne({ _id: productid});
-        console.log(data);
+        // console.log(data);
 
         return res.status(200).json({
             message: "Succesfully deleted this product",
@@ -203,7 +203,7 @@ const getCategories = async (req, res) => {
 const addCategories = async (req, res) => {
 
     // console.log(req.headers);
-    console.log(req.body);
+    // console.log(req.body);
 
     const title = req.body.title;
     const img = req.body.img;
