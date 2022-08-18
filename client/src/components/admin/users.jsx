@@ -13,38 +13,12 @@ import TableSortLabel from '@mui/material/TableSortLabel';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import Paper from '@mui/material/Paper';
-// import IconButton from '@mui/material/IconButton';
-// import Tooltip from '@mui/material/Tooltip';
-// import AddIcon from '@mui/icons-material/Add';
 import { visuallyHidden } from '@mui/utils';
 import { Button } from '@mui/material';
+import axios from 'axios';
+import { UserContext } from '../../App';
 
 
-// add Product ID -> Post updates to server
-function createData(name, price, quantity) {
-  return {
-    name,
-    price,
-    quantity
-  };
-}
-
-// Data will fetch from server -> loop through it and create rows
-const rows = [
-  createData('Cupcake', 305, 3.7),
-  createData('Donut', 452, 25.0),
-  createData('Eclair', 262, 16.0),
-  createData('Frozen yoghurt', 159, 6.0),
-  createData('Gingerbread', 356, 16.0),
-  createData('Honeycomb', 408, 3.2),
-  createData('Ice cream sandwich', 237, 9.0),
-  createData('Jelly Bean', 375, 0.0),
-  createData('KitKat', 518, 26.0),
-  createData('Lollipop', 392, 0.2),
-  createData('Marshmallow', 318, 0),
-  createData('Nougat', 360, 19.0),
-  createData('Oreo', 437, 18.0),
-];
 
 function descendingComparator(a, b, orderBy) {
   if (b[orderBy] < a[orderBy]) {
@@ -168,11 +142,31 @@ const EnhancedTableToolbar =()=>{
 
 export default function Users() {
 
+  const {userContext, setUserContext} = React.useContext(UserContext)
+  const id = userContext?.id;
+
   const [order, setOrder] = useState('asc');
   const [orderBy, setOrderBy] = useState('name');
   const [page, setPage] = useState(0);
   const [dense, setDense] = useState(false);
   const [rowsPerPage, setRowsPerPage] = useState(5);
+  const [rows, setUsers] = useState([]);
+
+  function getUsers(){
+    axios.get("http://localhost:2000/api/v1/users",{headers: {
+      id: id
+    }})
+      .then((resp)=>{
+        // console.log(resp.data);
+        setUsers(resp.data);
+      }).catch((error)=>{
+        console.log(error);
+      })
+  }
+
+  React.useEffect(()=>{
+    getUsers()
+  },[])
 
   const handleRequestSort = (event, property) => {
     const isAsc = orderBy === property && order === 'asc';
@@ -205,8 +199,6 @@ export default function Users() {
           >
             <EnhancedTableHead order={order} orderBy={orderBy} onRequestSort={handleRequestSort} />
             <TableBody>
-              {/* if you don't need to support IE11, you can replace the `stableSort` call with:
-                 rows.slice().sort(getComparator(order, orderBy)) */}
               {stableSort(rows, getComparator(order, orderBy))
                 .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                 .map((row, index) => {
@@ -214,12 +206,12 @@ export default function Users() {
                   const labelId = `enhanced-table-checkbox-${index}`;
 
                   return (
-                    <TableRow hover tabIndex={-1} key={row.name}>
+                    <TableRow hover tabIndex={-1} key={index}>
                       <TableCell component="th" id={labelId} scope="row" padding="normal">
                         {row.name}
                       </TableCell>
-                      <TableCell align="center">{row.price}</TableCell>
-                      <TableCell align="center">{row.quantity}</TableCell>
+                      <TableCell align="center">{row.email}</TableCell>
+                      <TableCell align="center">{row.createdAt}</TableCell>
                       <TableCell align="center">
                         <Button>Edit</Button>
                         <Button>Delete</Button>

@@ -188,7 +188,7 @@ export default function Products() {
   function getProducts(){
     axios.get("http://localhost:2000/api/v1/products")
       .then((resp)=>{
-        console.log(resp.data);
+        // console.log(resp.data);
         setProducts(resp.data)
         // refreshProducts();
       }).catch((error)=>{

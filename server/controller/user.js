@@ -124,6 +124,7 @@ const getUserById = async (req, res) => {
 // Not working, fix it
 const getUsers = async (req, res) => {
     try {
+        // Check if request is coming from admin
         const token = req.headers?.authorization?.split(" ")[1];
         
         if(token){
@@ -168,11 +169,37 @@ const getUsers = async (req, res) => {
 }
 
 
+
+const getAllUsers = async (req, res) => {
+    try {
+        const user = req.headers;
+        let findUser = await User.findOne({ _id: user.id});
+        console.log(findUser);
+    
+        if (findUser.isAdmin) {
+            console.log("user is admin");
+            const allUsers = await User.find();
+
+            return res.status(200).json(allUsers)
+        } else {
+            return res.status(401).json({
+                message: "User Unauthorized!",
+            })
+        }
+    } catch (error) {
+        return res.status(404).json({
+            message: "There was an error here!",
+            error
+        })
+    }
+}
+
+
 module.exports = {
     createUser,
     loginUser,
     getUserById,
-    getUsers
+    getAllUsers
 }
 
 
