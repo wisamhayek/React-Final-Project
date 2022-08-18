@@ -16,6 +16,10 @@ export default function Browse() {
 
   const {cat} = useParams()
 
+  useEffect(()=>{
+    document.title ='Browse';
+  },[])
+
   //Side Menu Drawer
   const [state, setState] = useState({
     left: false,

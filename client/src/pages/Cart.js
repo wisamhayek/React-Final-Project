@@ -178,6 +178,10 @@ export default function Cart() {
   const navigate = useNavigate();
 
   useEffect(()=>{
+    document.title ='Cart';
+  },[])
+
+  useEffect(()=>{
     if(userContext?.id){
       axios.get(`/api/v1/profile/${id}`)
       .then((response)=>{

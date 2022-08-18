@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react'
+import React, { Fragment, useEffect } from 'react'
 import NavBar from '../components/navBar/navBar'
 // import ImgSlider from '../components/home/imgSlider';
 import ByCategory from '../components/home/byCategory';
@@ -9,6 +9,11 @@ import Footer from "../components/home/Footer.jsx";
 
 
 export default function Home() {
+
+  useEffect(()=>{
+    document.title ='W&T Commerece';
+  },[])
+
   return (
     <Fragment>
       <NavBar />

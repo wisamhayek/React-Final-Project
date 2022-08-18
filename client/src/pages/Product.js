@@ -27,6 +27,10 @@ export default function Product() {
     }
   },[id])
 
+  useEffect(()=>{
+    document.title =`${singleProduct?.name}`;
+  },[singleProduct])
+
   return (
     <Fragment >
       <NavBar />

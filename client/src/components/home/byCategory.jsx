@@ -42,6 +42,7 @@ export default function ByCategory() {
         <Box className='categories' sx={{display:"grid",gridTemplateColumns:{xs: "1fr 1fr", md:"1fr 1fr 1fr 1fr"},width:{xs:"100%",md:"80%"},margin:"auto",rowGap:"1rem",columnGap:{xs:"0px",md:"1%"}}}>
             {categories.map((item,index) => (
                 <Link key={index} style={{ textDecoration: 'none' }} to={`browse/${item.title}`}>
+                <Box sx={{display:"flex", flexDirection:"column"}}>
                 <Button  variant="outlined" sx={{
                     fontSize: "large",
                     color:"white",
@@ -53,7 +54,9 @@ export default function ByCategory() {
                     backgroundImage: `url(${item.img})`,
                     backgroundSize: "cover",
                     backgroundRepeat:"no-repeat",
-                }}>{item.title}</Button>
+                }}></Button>
+                <Typography variant='h5' textAlign={"center"} sx={{marginTop:"1rem"}}>{item.title}</Typography>
+                </Box>
                 </Link>
             ))}
         </Box>

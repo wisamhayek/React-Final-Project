@@ -11,6 +11,10 @@ export default function Admin() {
   const [isAdmin,setAdmin] = useState(false);
   const id = userContext?.id;
 
+  useEffect(()=>{
+    document.title ='Admin Dashboard';
+  },[])
+
   function checkAdmin(userid){
     axios.get(`/api/v1/users/${userid}`)
         .then((response)=>{

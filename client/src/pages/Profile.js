@@ -16,6 +16,10 @@ export default function Profile() {
   const id = userContext?.id;
 
   useEffect(()=>{
+    document.title ="Profile";
+  },[])
+
+  useEffect(()=>{
     if(userContext?.id){
       axios.get(`/api/v1/profile/${id}`)
       .then((response)=>{

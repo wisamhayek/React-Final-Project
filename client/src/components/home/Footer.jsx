@@ -126,15 +126,9 @@ export default function Footer() {
         <Center>
             <Title>Useful Links</Title>
             <List>
-            <Link to={"/"}>
-            <ListItem>Home</ListItem>
-            </Link>
-            <Link to={"/cart"}>
-            <ListItem>Cart</ListItem>
-            </Link>
-            <Link to={"/profile"}>
-            <ListItem>My Profile</ListItem>
-            </Link>
+            <ListItem><Link to={"/"}>Home</Link></ListItem>
+            <ListItem><Link to={"/cart"}>Cart</Link></ListItem>
+            <ListItem><Link to={"/profile"}>Profile</Link></ListItem>
             <ListItem>Order Tracking</ListItem>
             <ListItem>Terms</ListItem>
             </List>

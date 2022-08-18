@@ -77,11 +77,11 @@ export default function Payments() {
   return (
     <Fragment>
     <Typography variant='h5' sx={{margin:"auto",textAlign:"center", marginBottom:"2rem"}}>Payments</Typography>
-    {profileContext?.profile.paymentMethod && 
+    {profileContext?.profile?.paymentMethod && 
     <Box sx={{width:"80%", margin:"auto"}}>
       <Typography variant='h6' sx={{margin:"auto",textAlign:"start", marginBottom:"1rem"}}>Saved Cards :</Typography>
       <Box sx={{display: "flex",flexDirection:'row'}}>
-        <Typography sx={{backgroundColor:"#dedede",width:"fit-content",padding:"1rem",borderRadius:"1rem"}}>XXX-{profileContext.profile.paymentMethod.last4}</Typography>
+        <Typography sx={{backgroundColor:"#dedede",width:"fit-content",padding:"1rem",borderRadius:"1rem"}}>XXX-{profileContext?.profile?.paymentMethod?.last4}</Typography>
         <DeletePaymnetButton />
       </Box>
     <Button variant="contained" size='large' sx={{marginTop:"2rem"}} onClick={handleClickOpen}>Add Card</Button>

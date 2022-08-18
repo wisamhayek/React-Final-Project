@@ -11,7 +11,7 @@ export default function OrderHistory() {
     <Fragment>
     <Typography variant='h5' sx={{margin:"auto",textAlign:"center",marginBottom: "2rem"}}>Order History</Typography>
 
-    {profileContext?.profile.orders && 
+    {profileContext?.profile?.orders && 
     <>
     {/* Desktop View */}
     <Box sx={{margin:"auto",textAlign:"center",display: {xs: "none", md: "grid"},gridTemplateColumns:" 40% 60%", borderTop:"1px solid gray", borderBottom:"1px solid gray"}}>

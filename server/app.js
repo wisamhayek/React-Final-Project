@@ -24,7 +24,7 @@ app.use(cors())
 app.use(morgan('dev'));
 
 // app.use(express.static(path.join(__dirname + '/public')))
-app.use(express.static('client/build'));
+// app.use(express.static('client/build'));
 
 
 mongoose.connect(mongoURl, (error)=>{
@@ -45,9 +45,9 @@ app.use('/api/v1/profile', ProfileRoutes);
 app.use('/create-checkout-session', checkoutRoutes);
 app.use('/api/v1/promotions', PromotionsRoutes);
 
-app.get('*', (req, res) => {
-    res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'));
-});
+// app.get('*', (req, res) => {
+//     res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'));
+// });
 
 app.listen(PORT, (req, res) => {
     console.log(`Server running at port ${PORT}`);
