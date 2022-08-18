@@ -185,7 +185,7 @@ export default function Cart() {
     if(userContext?.id){
       axios.get(`/api/v1/profile/${id}`)
       .then((response)=>{
-      setCartContext(response.data.data.profile.cart)
+      setCartContext(response.data?.data?.profile?.cart)
       }).catch((error)=>{
           console.log(error);
       })
@@ -195,7 +195,7 @@ export default function Cart() {
   function refreshCart(){
     axios.get(`/api/v1/profile/${id}`)
     .then((response)=>{
-      setCartContext(response.data.data.profile.cart)
+      setCartContext(response.data?.data?.profile?.cart)
     }).catch((error)=>{
       console.log(error);
     })
