@@ -185,9 +185,11 @@ export default function Cart() {
     if(userContext?.id){
       axios.get(`/api/v1/profile/${id}`)
       .then((response)=>{
-        if(response.data.data.profile.cart){
+        if(Array.isArray(response.data.data.profile.cart)){
+          // console.log(response.data.data.profile.cart);
           setCartContext(response.data?.data?.profile?.cart)
         }else{
+          // console.log("out");
           setCartContext([])
         }
       }).catch((error)=>{

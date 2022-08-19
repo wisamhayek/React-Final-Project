@@ -20,16 +20,20 @@ const UserSchema = mongoose.Schema({
     },
     profile:{
         billingAddress: {
-            type: Object
+            type: Object,
+            default: {}
         },
         shippingAddress: {
-            type: Object
+            type: Object,
+            default: {}
         },
         paymentMethod:{
-            type: Object
+            type: Object,
+            default: {}
         },
         cart:{
-            type: Array,
+            // type: Array,
+            // default: [],
             itemid: {
                 type:  mongoose.Schema.Types.ObjectId,
                 ref: 'Products'
