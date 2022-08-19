@@ -6,7 +6,7 @@ import { useEffect, useState } from "react";
 import { useNavigate } from 'react-router-dom';
 import styled from "styled-components";
 // import { sliderItems } from "../../constants/metaData";
-import { mobile } from "../../constants/responsive";
+import { mobile, tablet } from "../../constants/responsive";
 
 const Container = styled.div`
   width: 100%;
@@ -50,17 +50,20 @@ const Slide = styled.div`
   grid-template-columns: 1fr 1fr;
   align-items: center;
   background-color: #${(props) => props.bg};
-  ${mobile({ height: "auto" })}
+  ${mobile({ height: "auto", gridTemplateColumns:"1fr" })}
+  ${tablet({  })}
 `;
 
 const ImgContainer = styled.div`
   height: 100%;
   ${mobile({ display: "none" })}
+  ${tablet({ height: "auto" })}
 `;
 
 const Image = styled.img`
   height: 80%;
   ${mobile({ display: "none" })}
+  ${tablet({ width: "100%",height:"auto"})}
 `;
 // object-fit: cover;
 
@@ -111,7 +114,7 @@ const Slider = () => {
 
   function fetchPromotions(){
     //Fetch category and return/ use the first 4
-    axios.get(`/api/v1/promotions`)
+    axios.get(`http://localhost:2000/api/v1/promotions`)
     .then((response)=>{
       // console.log(response.data.data);
       setSlideItems(response.data.data);
