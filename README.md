@@ -36,6 +36,11 @@ Browse:
 - Filter products by category.
 - Sort by price / newly added.
 
+User Profile:
+- Update addresses
+- Update Credit Card information
+
 Features Not implemented: 
 - After succesful payment orders are not sent to server/created.
 - Cart shipping/discount codes.
+- Admin revenue/profits
